@@ -1,5 +1,7 @@
 {
   "name": "FrontEndBerton",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }
