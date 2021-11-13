@@ -1,0 +1,39 @@
+<ion-grid>
+  <ion-row class="ion-align-items-start">
+    <ion-col size="12">
+      <div class="home-title">
+        <ion-icon class="home-title-icon" slot="start" name="bed-outline"></ion-icon>
+        <h5 class="title-label">{{titulo}}</h5>
+      </div>
+      
+    </ion-col>
+  </ion-row>
+  <ion-row class="ion-align-items-start main-card">
+    <ion-col *ngFor="let item of establecimientos">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>
+            <div class="card-icon-label">
+              <ion-icon class="card-icon" name="bed"></ion-icon>
+              <span class="card-label">Hotel</span>
+            </div>   
+          </ion-card-subtitle>
+          <ion-card-title>Maria Cristina</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p>Imagen</p>
+          <div>
+            <ion-chip>
+              <ion-icon name="navigate" color="dark"></ion-icon>
+              <ion-label>5km</ion-label>
+            </ion-chip>
+            <ion-chip>
+              <ion-icon name="star" color="dark"></ion-icon>
+              <ion-label>5</ion-label>
+            </ion-chip>
+          </div>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

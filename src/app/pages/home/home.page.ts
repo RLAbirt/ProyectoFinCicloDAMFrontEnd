@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 })
 export class HomePage {
 
+  categorias: string[] = ['Hoteles', 'Restaurantes', 'Casas Rurales'];
+
   constructor() {}
 
 }

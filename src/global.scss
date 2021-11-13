@@ -24,3 +24,67 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-app {
+  --ion-background-color: #d9fff0;
+}
+
+
+.card-icon {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: smaller;
+    
+}
+
+.card-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 4px;
+    font-size: smaller;
+}
+
+.title-icon {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: large;
+}
+
+.title-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+.main-card {
+    
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 12px;
+    overflow: hidden;
+    ion-col {
+      display: flex;
+      justify-content: center;
+      padding: 4px;
+    }
+    ion-card {
+      background-color: #d9fff0;
+      margin-bottom: 12px;
+      margin-top: 12px;
+      width: 100%;
+    }
+    ion-card-content {
+      color: #fff;
+    }
+    ion-icon {
+      font-size: small;
+    }
+    ion-label {
+      font-size: small;
+    }
+  }
+
+  ion-title {
+    color: var(--ion-color-primary);
+  }

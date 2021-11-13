@@ -1,7 +1,7 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border" [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+      Berton
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -10,15 +10,7 @@
 <!-- Comentario de Rocío-->
 
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="container" [fullscreen]="true">
+  <app-categoria-inicio *ngFor="let item of categorias" [titulo]="item"></app-categoria-inicio>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
 </ion-content>
