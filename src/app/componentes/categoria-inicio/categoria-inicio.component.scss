@@ -3,13 +3,34 @@
 }
 
 .home-title {
+    
     margin-left: 16px;
     ion-icon {
+        font-size: xx-large;
         display: inline-block;
         vertical-align: middle;
     }
     h5 {
         display: inline-block;
         vertical-align: middle;
+    }
+}
+
+.card-ver-mas {
+    height: 90%;
+
+    ion-card-content {
+        color: black; 
+        font-size: x-large;
+        
+    }
+    
+    
+}
+
+.card-ver-mas-content {
+
+    ion-icon {
+        font-size: xx-large;
     }
 }

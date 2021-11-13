@@ -9,6 +9,11 @@ export class CategoriaInicioComponent implements OnInit {
 
   @Input() titulo:string; //Se convertirá en un objeto establecimiento para rellenar las tarjetas
   establecimientos: string[] = ['',''];
+  slideOpts = {
+    initialSlide: 0,
+    speed: 400,
+    slidesPerView: 2,
+  };
 
   constructor() { }
 
