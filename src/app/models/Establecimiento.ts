@@ -1,11 +1,15 @@
-import { Properties } from './Properties';
 import { Geometry } from './Geometry';
 
 export class Establecimiento {
 
-    constructor() {}
-
+    establecimientoid:number;
+    type:string;
     geometry: Geometry;
-    properties: Properties;
+
+    constructor(establecimientoid:number, type:string, geometry:Geometry) {
+        this.establecimientoid = establecimientoid;
+        this.type = type;
+        this.geometry = geometry;
+    }
 
 }

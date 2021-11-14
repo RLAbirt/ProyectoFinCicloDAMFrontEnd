@@ -1,8 +1,14 @@
 import { Establecimiento } from './Establecimiento';
+import { OfertaProperties } from './OfertaProperties';
 
 export class Oferta extends Establecimiento {
 
-    constructor() { super(); }
+    ofertaproperties:OfertaProperties;
+
+    constructor(ofertaproperties:OfertaProperties) { 
+        super(); 
+        this.ofertaproperties = ofertaproperties;
+    }
 
 
 }
