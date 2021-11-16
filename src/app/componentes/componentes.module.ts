@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CategoriaInicioComponent } from './categoria-inicio/categoria-inicio.component';
 import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
+import { DetalleComponent } from './detalle/detalle.component'
 
 
 
@@ -10,6 +11,7 @@ import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
   declarations: [
     CategoriaInicioComponent,
     MenuLateralComponent,
+    DetalleComponent,
   ],
   imports: [
     CommonModule,
@@ -17,7 +19,8 @@ import { MenuLateralComponent } from './menu-lateral/menu-lateral.component';
   ],
   exports: [
     CategoriaInicioComponent,
-    MenuLateralComponent
+    MenuLateralComponent,
+    DetalleComponent
   ]
 })
 export class ComponentesModule { }
