@@ -9,7 +9,7 @@
   </ion-row>
   <ion-row class="main-card">
       <ion-slides pager="false" [options]="slideOpts">
-        <ion-slide *ngFor="let item of establecimientos">
+        <ion-slide *ngFor="let item of establecimientos; let i = index">
           <ion-card>
             <ion-img src="../../assets/images/hotel.jpg"></ion-img>
           <ion-card-header>

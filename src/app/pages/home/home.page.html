@@ -11,6 +11,9 @@
 
 
 <ion-content class="container" [fullscreen]="true">
-  <app-categoria-inicio *ngFor="let item of categorias" [titulo]="item"></app-categoria-inicio>
+  <app-categoria-inicio 
+      *ngFor="let item of categorias" 
+      [titulo]="item"
+      [hoteles]="hoteles"></app-categoria-inicio>
 
 </ion-content>
