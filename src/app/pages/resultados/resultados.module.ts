@@ -1,5 +1,4 @@
 import { DetalleResultadosPageModule } from './../detalle-resultados/detalle-resultados.module';
-import { DetalleComponent } from './../../componentes/detalle/detalle.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,7 +13,6 @@ import { ComponentesModule } from 'src/app/componentes/componentes.module';
 
 @NgModule({
   entryComponents:[
-    DetalleResultadosPage
   ],
   imports: [
     CommonModule,
