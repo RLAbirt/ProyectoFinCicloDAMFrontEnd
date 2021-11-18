@@ -3,7 +3,7 @@ import { ModalController, NavController } from '@ionic/angular';
 import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
 
 @Component({
-  selector: 'app-resultados',
+  selector: 'app-resultados-list',
   templateUrl: './resultados.component.html',
   styleUrls: ['./resultados.component.scss'],
 })

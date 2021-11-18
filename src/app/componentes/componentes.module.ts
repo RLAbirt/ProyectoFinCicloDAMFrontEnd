@@ -1,3 +1,4 @@
+import { SelectorComponent } from './selector/selector.component';
 import { ResultadosComponent } from './resultados/resultados.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
@@ -13,7 +14,8 @@ import { DetalleComponent } from './detalle/detalle.component'
     CategoriaInicioComponent,
     MenuLateralComponent,
     DetalleComponent,
-    ResultadosComponent
+    ResultadosComponent,
+    SelectorComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import { DetalleComponent } from './detalle/detalle.component'
     CategoriaInicioComponent,
     MenuLateralComponent,
     DetalleComponent,
-    ResultadosComponent
+    ResultadosComponent,
+    SelectorComponent
   ]
 })
 export class ComponentesModule { }
