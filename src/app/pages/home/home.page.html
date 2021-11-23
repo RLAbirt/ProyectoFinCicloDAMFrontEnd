@@ -7,14 +7,9 @@
   </ion-toolbar>
 </ion-header>
 
-<!-- Comentario de Pablo -->
-<!-- Comentario de Rocío-->
-
-
 <ion-content class="container" [fullscreen]="true">
   <app-categoria-inicio 
       *ngFor="let item of categorias" 
       [titulo]="item"
       [hoteles]="hoteles"></app-categoria-inicio>
-
 </ion-content>
