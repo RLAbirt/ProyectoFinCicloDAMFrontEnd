@@ -1,5 +1,9 @@
+import { Restaurante } from './../../models/Restaurante';
+import { CasaRural } from './../../models/CasaRural';
 import { Component, Input, OnInit } from '@angular/core';
 import { Establecimiento } from 'src/app/models/InterfacesMock.interface';
+import { Hotel } from 'src/app/models/Hotel';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-categoria-inicio',
@@ -16,13 +20,34 @@ export class CategoriaInicioComponent implements OnInit {
     slidesPerView: 2,
   };
 
-  @Input() hoteles: Establecimiento[]= [];
+  @Input() hoteles: Hotel[]= [];
+           casasrurales: CasaRural[] = [];
+           restaurantes: Restaurante[] = []; 
 
 
 
-  constructor() { }
+  constructor(private httpService: HttpService) { }
 
   ngOnInit() {
+    this.httpService.getSliceHoteles()
+      .subscribe(resp => {
+        console.log(resp);
+        this.hoteles = resp;
+      })
     console.log(this.hoteles)
+
+    this.httpService.getSliceCasasRurales()
+      .subscribe(resp => {
+        console.log(resp);
+        this.casasrurales = resp;
+      })
+    console.log(this.casasrurales)
+
+    this.httpService.getSliceRestaurantes()
+      .subscribe(resp => {
+        console.log(resp);
+        this.restaurantes = resp;
+      })
+    console.log(this.restaurantes)
   }
 }

@@ -1,6 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { ModalController, NavController } from '@ionic/angular';
 import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
+import { HttpService } from 'src/app/services/http.service';
+import { Restaurante } from './../../models/Restaurante';
+import { CasaRural } from './../../models/CasaRural';
+import { Hotel } from 'src/app/models/Hotel';
+import { Oferta } from 'src/app/models/Oferta';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-resultados-list',
@@ -9,9 +14,46 @@ import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-
 })
 export class ResultadosComponent implements OnInit {
 
-  constructor(private mdlCtrl: ModalController, public navCtrl: NavController) { }
+  @Input() hoteles: Hotel[]= [];
+           casasrurales: CasaRural[] = [];
+           restaurantes: Restaurante[] = []; 
+           ofertas: Oferta[] = [];
+           distancia: number = 1;
+           lon: number;
+           lat: number;
+           tipo: string;
 
-  ngOnInit() {}
+  constructor(private mdlCtrl: ModalController, public navCtrl: NavController, private httpService: HttpService) { }
+
+  ngOnInit() {
+    this.httpService.getByGeoHoteles(this.lon,this.lat,this.distancia)
+      .subscribe(resp => {
+        console.log(resp);
+        this.hoteles = resp;
+      })
+    console.log(this.hoteles)
+
+    this.httpService.getByGeoCasasRurales(this.lon,this.lat,this.distancia, this.tipo)
+      .subscribe(resp => {
+        console.log(resp);
+        this.casasrurales = resp;
+      })
+    console.log(this.casasrurales)
+
+    this.httpService.getByGeoRestaurantes(this.lon,this.lat,this.distancia)
+      .subscribe(resp => {
+        console.log(resp);
+        this.restaurantes = resp;
+      })
+    console.log(this.restaurantes)
+
+    this.httpService.getAllOfertas()
+      .subscribe(resp => {
+        console.log(resp);
+        this.ofertas = resp;
+      })
+    console.log(this.ofertas)
+  }
 
   async abrirModal(){
     const modal = await this.mdlCtrl.create({
