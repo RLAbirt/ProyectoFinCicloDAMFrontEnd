@@ -1,10 +1,3 @@
-export interface Establecimiento {
-    id: number;
-    type: string;
-    geometry: Geometry;
-    properties: Properties;
-}
-
 export interface Ofertas {
   _id: Id;
   type: string;
