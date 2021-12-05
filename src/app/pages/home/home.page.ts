@@ -1,7 +1,8 @@
+import { GeolocationService } from './../../services/geolocation.service';
 import { HttpService } from './../../services/http.service';
 import { Component, OnInit } from '@angular/core';
 import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomePage implements OnInit {
 
   hoteles: Hoteles[] = [];
 
-  constructor(private httpService:HttpService, private geolocation: Geolocation) {}
+  constructor(private httpService:HttpService) {}
 
   ngOnInit(): void {
     this.httpService.getSliceHoteles()
@@ -25,14 +26,9 @@ export class HomePage implements OnInit {
   }
 
   abrirGPS(): void {
-    console.log("Geoposicion:"); 
-    this.geolocation.getCurrentPosition({maximumAge: 5000, timeout: 5000, 
-      enableHighAccuracy: false})
-            .then((resp) => {
-              console.log(resp.coords.latitude);
-              console.log(resp.coords.longitude);
-             }).catch((error) => {
-                 console.log('Error getting location', error);
-             });
+    console.log("Geoposicion:");
+    let GeoService:GeolocationService; 
+    let st:String = GeoService.GetGPS(); 
+    console.log(st); 
   }
 }
