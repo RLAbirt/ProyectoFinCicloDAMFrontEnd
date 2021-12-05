@@ -1,10 +1,7 @@
 import { ModalController, NavController } from '@ionic/angular';
 import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
 import { HttpService } from 'src/app/services/http.service';
-import { Restaurante } from './../../models/Restaurante';
-import { CasaRural } from './../../models/CasaRural';
-import { Hotel } from 'src/app/models/Hotel';
-import { Oferta } from 'src/app/models/Oferta';
+import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -14,10 +11,10 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ResultadosComponent implements OnInit {
 
-  @Input() hoteles: Hotel[]= [];
-           casasrurales: CasaRural[] = [];
-           restaurantes: Restaurante[] = []; 
-           ofertas: Oferta[] = [];
+  @Input() hoteles: Hoteles[]= [];
+           casasrurales: CasasRurales[] = [];
+           restaurantes: Restaurantes[] = []; 
+           ofertas: Ofertas[] = [];
            distancia: number = 1;
            lon: number;
            lat: number;

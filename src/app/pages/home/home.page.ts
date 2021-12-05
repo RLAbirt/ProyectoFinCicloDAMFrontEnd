@@ -1,7 +1,6 @@
 import { HttpService } from './../../services/http.service';
 import { Component, OnInit } from '@angular/core';
-import { Establecimiento } from 'src/app/models/InterfacesMock.interface';
-
+import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @Component({
@@ -13,7 +12,7 @@ export class HomePage implements OnInit {
 
   categorias: string[] = ['Hoteles', 'Restaurantes', 'Casas Rurales'];
 
-  hoteles: Establecimiento[] = [];
+  hoteles: Hoteles[] = [];
 
   constructor(private httpService:HttpService, private geolocation: Geolocation) {}
 

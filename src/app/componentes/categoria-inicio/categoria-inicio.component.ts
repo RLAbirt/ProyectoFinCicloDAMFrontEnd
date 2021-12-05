@@ -1,8 +1,5 @@
-import { Restaurante } from './../../models/Restaurante';
-import { CasaRural } from './../../models/CasaRural';
 import { Component, Input, OnInit } from '@angular/core';
-import { Establecimiento } from 'src/app/models/InterfacesMock.interface';
-import { Hotel } from 'src/app/models/Hotel';
+import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -20,9 +17,9 @@ export class CategoriaInicioComponent implements OnInit {
     slidesPerView: 2,
   };
 
-  @Input() hoteles: Hotel[]= [];
-           casasrurales: CasaRural[] = [];
-           restaurantes: Restaurante[] = []; 
+  @Input() hoteles: Hoteles[]= [];
+           casasrurales: CasasRurales[] = [];
+           restaurantes: Restaurantes[] = []; 
 
 
 
