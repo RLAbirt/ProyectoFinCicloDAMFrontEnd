@@ -18,6 +18,7 @@ export class HomePage implements OnInit {
   constructor(private httpService:HttpService, private geoService:GeolocationService) {}
 
   ngOnInit(): void {
+    GeolocationService.ActualizarPosicion(); 
     this.httpService.getSliceHoteles()
       .subscribe( resp => {
         console.log(resp);

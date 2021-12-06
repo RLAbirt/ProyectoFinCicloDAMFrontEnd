@@ -6,12 +6,19 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class GeolocationService {
 
+  private static geo: Geolocation; 
   private static latitude: number = 0; 
   private static longitude: number = 0; 
 
   constructor(private geolocation: Geolocation) 
   { 
-    geolocation.getCurrentPosition({maximumAge: 5000, timeout: 5000, 
+    GeolocationService.geo = geolocation; 
+    GeolocationService.ActualizarPosicion();
+  }
+
+  public static ActualizarPosicion(): void
+  {
+    GeolocationService.geo.getCurrentPosition({maximumAge: 5000, timeout: 5000, 
       enableHighAccuracy: false})
             .then((resp) => {
               GeolocationService.latitude = resp.coords.latitude; 
