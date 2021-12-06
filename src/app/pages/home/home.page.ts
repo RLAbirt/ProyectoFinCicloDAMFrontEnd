@@ -15,7 +15,7 @@ export class HomePage implements OnInit {
 
   hoteles: Hoteles[] = [];
 
-  constructor(private httpService:HttpService) {}
+  constructor(private httpService:HttpService, private geoService:GeolocationService) {}
 
   ngOnInit(): void {
     this.httpService.getSliceHoteles()
@@ -26,9 +26,6 @@ export class HomePage implements OnInit {
   }
 
   abrirGPS(): void {
-    console.log("Geoposicion:");
-    let GeoService:GeolocationService = new GeolocationService(); 
-    let st:String = GeoService.GetGPS(); 
-    console.log(st); 
+    console.log('Geoposicion: ' + GeolocationService.GetLatitude() + ', ' + GeolocationService.GetLongitude()); 
   }
 }

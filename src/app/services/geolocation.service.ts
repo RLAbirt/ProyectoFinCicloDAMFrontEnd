@@ -6,22 +6,28 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 })
 export class GeolocationService {
 
-  constructor() { }
+  private static latitude: number = 0; 
+  private static longitude: number = 0; 
 
-  public GetGPS(): string 
-  {
-    let geolocation: Geolocation = new Geolocation();
-    console.log("Geoposicion:"); 
+  constructor(private geolocation: Geolocation) 
+  { 
     geolocation.getCurrentPosition({maximumAge: 5000, timeout: 5000, 
       enableHighAccuracy: false})
             .then((resp) => {
-              console.log (resp.coords.latitude + ' ' + resp.coords.longitude); 
-              return resp.coords.latitude + ' ' + resp.coords.longitude;
+              GeolocationService.latitude = resp.coords.latitude; 
+              GeolocationService.longitude = resp.coords.longitude;
              }).catch((error) => {
                  console.log('Error getting location', error);
-                 return ""; 
              });
-             return ""; 
   }
 
+  public static GetLatitude(): number
+  {
+    return this.latitude;     
+  }
+
+  public static GetLongitude(): number
+  {
+    return this.longitude; 
+  }
 }
