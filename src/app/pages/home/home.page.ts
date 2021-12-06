@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
 
   abrirGPS(): void {
     console.log("Geoposicion:");
-    let GeoService:GeolocationService; 
+    let GeoService:GeolocationService = new GeolocationService(); 
     let st:String = GeoService.GetGPS(); 
     console.log(st); 
   }
