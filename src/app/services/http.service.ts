@@ -13,17 +13,16 @@ import 'rxjs/Rx';
 export class HttpService {
 
   private apiUrl:string = 'https://10.2.106.162.labs.birt.eus:8081/';
-  private apiUrlMock: string = 'http://localhost:8081/api';
   
 
   constructor(private http:HttpClient) { }
 
   public getAllOfertas() :Observable<Ofertas[]>{
-    return this.http.get<Ofertas[]>(`${this.apiUrlMock}/ofertas`)
+    return this.http.get<Ofertas[]>(`${this.apiUrl}/ofertas`)
   }
 
   public getAllHoteles() :Observable<Hoteles[]> {
-    return this.http.get<Hoteles[]>(`${this.apiUrlMock}/hoteles`);
+    return this.http.get<Hoteles[]>(`${this.apiUrl}/hoteles`);
   }
 
   public getByGeoHoteles(lon: number, lat: number, dist: number) :Observable<Hoteles[]> {
@@ -32,7 +31,7 @@ export class HttpService {
     paramsGH.append('lat', lat);
     paramsGH.append('dist', dist);
 
-    return this.http.get<Hoteles[]>(`${this.apiUrlMock}/hoteles/geo`,{params: paramsGH});
+    return this.http.get<Hoteles[]>(`${this.apiUrl}/hoteles/geo`,{params: paramsGH});
   }
 
   public getSliceHoteles():Observable<Hoteles[]> {
@@ -40,11 +39,11 @@ export class HttpService {
     params.set('_start', 0)
     params.set('_end', 2);
 
-    return this.http.get<Hoteles[]>(`${this.apiUrlMock}/hoteles/?_start=0&_end=2`);
+    return this.http.get<Hoteles[]>(`${this.apiUrl}/hoteles/?_start=0&_end=2`);
   }
 
   public getAllCasasRurales():Observable<CasasRurales[]> {
-    return this.http.get<CasasRurales[]>(`${this.apiUrlMock}/casasrurales`);
+    return this.http.get<CasasRurales[]>(`${this.apiUrl}/casasrurales`);
   }
 
   public getByTypeCasasRurales(tipo: string):Observable<CasasRurales[]> {
@@ -52,7 +51,7 @@ export class HttpService {
     paramsR.set('type', tipo)
     paramsR.set('_end', 2);
 
-    return this.http.get<CasasRurales[]>(`${this.apiUrlMock}/casasrurales/`,{params: paramsR});
+    return this.http.get<CasasRurales[]>(`${this.apiUrl}/casasrurales/`,{params: paramsR});
   }
 
   public getSliceCasasRurales(): Observable<CasasRurales[]>{
@@ -60,7 +59,7 @@ export class HttpService {
     paramsSC.set('_start', 0)
     paramsSC.set('_end', 2);
 
-    return this.http.get<Hoteles[]>(`${this.apiUrlMock}/casasrurales/`,{params: paramsSC});
+    return this.http.get<Hoteles[]>(`${this.apiUrl}/casasrurales/`,{params: paramsSC});
   }
 
   public getByGeoCasasRurales(lon: number, lat: number, dist: number, tipo: string) : Observable<CasasRurales[]> {
@@ -70,11 +69,11 @@ export class HttpService {
     paramsGC.append('dist', dist);
     paramsGC.append('type', tipo);
 
-    return this.http.get<CasasRurales[]>(`${this.apiUrlMock}/casasrurales/geo`,{params: paramsGC});
+    return this.http.get<CasasRurales[]>(`${this.apiUrl}/casasrurales/geo`,{params: paramsGC});
   }
 
   public getAllRestaurantes(): Observable<Restaurantes[]> {
-    return this.http.get<Restaurantes[]>(`${this.apiUrlMock}/restaurantes`);
+    return this.http.get<Restaurantes[]>(`${this.apiUrl}/restaurantes`);
   }
 
   public getByGeoRestaurantes(lon: number, lat: number, dist: number): Observable<Restaurantes[]> {
@@ -83,7 +82,7 @@ export class HttpService {
     paramsGR.append('lat', lat);
     paramsGR.append('dist', dist);
 
-    return this.http.get<Restaurantes[]>(`${this.apiUrlMock}/restaurantes/geo`,{params: paramsGR});
+    return this.http.get<Restaurantes[]>(`${this.apiUrl}/restaurantes/geo`,{params: paramsGR});
   }
 
   public getSliceRestaurantes() : Observable<Restaurantes[]>{
@@ -91,7 +90,7 @@ export class HttpService {
     paramsSR.set('_start', 0)
     paramsSR.set('_end', 2);
 
-    return this.http.get<Hoteles[]>(`${this.apiUrlMock}/restaurantes`,{params: paramsSR});
+    return this.http.get<Hoteles[]>(`${this.apiUrl}/restaurantes`,{params: paramsSR});
   }
 
   private handleError(err: HttpErrorResponse){

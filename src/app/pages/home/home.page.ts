@@ -14,19 +14,34 @@ export class HomePage implements OnInit {
   categorias: string[] = ['Hoteles', 'Restaurantes', 'Casas Rurales'];
 
   hoteles: Hoteles[] = [];
+  restaurantes: Restaurantes[] = [];
+  casasRurales: CasasRurales[] = [];
+  ofertas: Ofertas[] = [];
 
   constructor(private httpService:HttpService, private geoService:GeolocationService) {}
 
   ngOnInit(): void {
-    GeolocationService.ActualizarPosicion(); 
-    this.httpService.getSliceHoteles()
+    this.getPosicion();
+    this.httpService.getAllHoteles()
       .subscribe( resp => {
         console.log(resp);
         this.hoteles = resp;
-      })
+      });
+    this.httpService.getAllRestaurantes()
+      .subscribe(resp => {
+        this.restaurantes = resp.slice(0,2);
+      });
+    this.httpService.getAllCasasRurales()
+      .subscribe( resp => {
+        this.casasRurales = resp.slice(0,2);
+      } );
+    this.httpService.getAllOfertas()
+      .subscribe( resp => {
+        this.ofertas = resp.slice(0,2);
+      });
   }
 
-  abrirGPS(): void {
-    console.log('Geoposicion: ' + GeolocationService.GetLatitude() + ', ' + GeolocationService.GetLongitude()); 
+  getPosicion() {
+    this.geoService.actualizarPosicion();
   }
 }

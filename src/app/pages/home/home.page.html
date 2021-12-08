@@ -8,9 +8,13 @@
 </ion-header>
 
 <ion-content class="container" [fullscreen]="true">
-  <ion-button  (click)="abrirGPS()">GPS</ion-button>
   <app-categoria-inicio 
-      *ngFor="let item of categorias" 
-      [titulo]="item"
+      [titulo]="categorias[0]"
       [hoteles]="hoteles"></app-categoria-inicio>
+  <app-categoria-inicio 
+      [titulo]="categorias[1]"
+      [restaurantes]="restaurantes"></app-categoria-inicio>
+  <app-categoria-inicio 
+      [titulo]="categorias[2]"
+      [casasRurales]="casasRurales"></app-categoria-inicio>
 </ion-content>
