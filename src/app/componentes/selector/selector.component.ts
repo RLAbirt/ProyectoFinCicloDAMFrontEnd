@@ -7,8 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectorComponent implements OnInit {
 
+  valueSelected: string = "1";
+
   constructor() { }
 
   ngOnInit() {}
+
+  segmentChanged(event: Event){
+    this.valueSelected= (event as CustomEvent).detail.value;
+  }
 
 }
