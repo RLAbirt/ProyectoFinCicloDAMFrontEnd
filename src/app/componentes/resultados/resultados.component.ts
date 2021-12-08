@@ -5,6 +5,7 @@ import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/be
 import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GeolocationService } from 'src/app/services/geolocation.service';
+import { SelectorComponent } from '../selector/selector.component';
 
 @Component({
   selector: 'app-resultados-list',
@@ -14,7 +15,7 @@ import { GeolocationService } from 'src/app/services/geolocation.service';
 export class ResultadosComponent implements OnInit {
 
   @Input() listado: any[]=[];
-           distSelect: number = 1;
+           distSelect: number = SelectorComponent.getDistance();
            lon: number;
            lat: number;
            tipo: string;
