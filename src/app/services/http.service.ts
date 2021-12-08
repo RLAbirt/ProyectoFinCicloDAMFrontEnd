@@ -48,7 +48,8 @@ export class HttpService {
 
   public getByTypeCasasRurales(tipo: string):Observable<CasasRurales> {
     let paramsR = new HttpParams();
-    paramsR.set('type', tipo)
+    paramsR.append('type', tipo)
+    paramsR.set('_start', 0)
     paramsR.set('_end', 2);
 
     return this.http.get<CasasRurales>('/api/casasrurales/', {params: paramsR});

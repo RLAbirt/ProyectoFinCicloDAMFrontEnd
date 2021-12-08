@@ -7,8 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectorComponent implements OnInit {
 
+  static valueSelected: string = "1";
+
   constructor() { }
 
   ngOnInit() {}
+
+  private segmentChanged(event: Event){
+    SelectorComponent.valueSelected= (event as CustomEvent).detail.value;
+  }
+
+  public static getDistance(){
+    return +this.valueSelected;
+  }
 
 }
