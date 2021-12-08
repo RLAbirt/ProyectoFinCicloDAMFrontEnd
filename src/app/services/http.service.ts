@@ -13,7 +13,7 @@ import 'rxjs/Rx';
 export class HttpService {
 
   private apiUrl:string = 'https://10.2.106.162.labs.birt.eus:8081/';
-  private apiUrlMock: string = 'http://localhost:3000/api';
+  private apiUrlMock: string = 'http://localhost:8081/api';
   
 
   constructor(private http:HttpClient) { }
