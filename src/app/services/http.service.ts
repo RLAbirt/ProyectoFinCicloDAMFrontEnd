@@ -2,7 +2,6 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../interfaces/bertoninterfaces';
 import { Observable, throwError } from 'rxjs';
-// import 'rxjs/Rx';
 
 
 
@@ -11,8 +10,8 @@ import { Observable, throwError } from 'rxjs';
 })
 export class HttpService {
 
-  private apiUrl:string = 'https://10.2.106.162.labs.birt.eus:8081/';
-  private apiUrlMock: string = '/api';
+  // private apiUrl:string = 'https://10.2.106.162.labs.birt.eus:8081/';
+  // private apiUrlMock: string = '/api';
   
 
   constructor(private http:HttpClient) { }

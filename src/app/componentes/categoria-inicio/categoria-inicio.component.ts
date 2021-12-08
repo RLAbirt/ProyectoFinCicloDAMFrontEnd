@@ -26,7 +26,7 @@ export class CategoriaInicioComponent implements OnInit {
 
 
   constructor(private httpService: HttpService) { }
-  title = 'proxy';
+ 
   ngOnInit() {
     this.httpService.getSliceHoteles()
       .subscribe(resp => {
