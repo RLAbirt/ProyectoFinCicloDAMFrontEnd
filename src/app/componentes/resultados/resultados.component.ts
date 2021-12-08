@@ -8,13 +8,15 @@ import { Component, Input, OnInit } from '@angular/core';
   selector: 'app-resultados-list',
   templateUrl: './resultados.component.html',
   styleUrls: ['./resultados.component.scss'],
+  providers: [HttpService],
 })
 export class ResultadosComponent implements OnInit {
 
-  @Input() hoteles: Hoteles[]= [];
-           casasrurales: CasasRurales[] = [];
-           restaurantes: Restaurantes[] = []; 
-           ofertas: Ofertas[] = [];
+  title = 'proxy';
+  @Input() hoteles: Hoteles;
+           casasrurales: CasasRurales;
+           restaurantes: Restaurantes; 
+           ofertas: Ofertas;
            distancia: number = 1;
            lon: number;
            lat: number;

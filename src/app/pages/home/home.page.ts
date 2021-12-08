@@ -13,7 +13,7 @@ export class HomePage implements OnInit {
 
   categorias: string[] = ['Hoteles', 'Restaurantes', 'Casas Rurales'];
 
-  hoteles: Hoteles[] = [];
+  hoteles: Hoteles;
 
   constructor(private httpService:HttpService, private geoService:GeolocationService) {}
 

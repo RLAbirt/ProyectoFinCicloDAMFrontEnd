@@ -6,8 +6,10 @@ import { HttpService } from 'src/app/services/http.service';
   selector: 'app-categoria-inicio',
   templateUrl: './categoria-inicio.component.html',
   styleUrls: ['./categoria-inicio.component.scss'],
+  providers: [HttpService],
 })
 export class CategoriaInicioComponent implements OnInit {
+
 
   @Input() titulo: string; //Se convertirá en un objeto establecimiento para rellenar las tarjetas
   establecimientos: string[] = ['',''];
@@ -17,14 +19,14 @@ export class CategoriaInicioComponent implements OnInit {
     slidesPerView: 2,
   };
 
-  @Input() hoteles: Hoteles[]= [];
-           casasrurales: CasasRurales[] = [];
-           restaurantes: Restaurantes[] = []; 
+  @Input() hoteles: Hoteles;
+           casasrurales: CasasRurales;
+           restaurantes: Restaurantes; 
 
 
 
   constructor(private httpService: HttpService) { }
-
+  title = 'proxy';
   ngOnInit() {
     this.httpService.getSliceHoteles()
       .subscribe(resp => {
