@@ -3,7 +3,7 @@ import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-
 import { HttpService } from 'src/app/services/http.service';
 import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { SelectorComponent } from '../selector/selector.component';
 

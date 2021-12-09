@@ -22,10 +22,13 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.getPosicion();
+    
     this.httpService.getAllHoteles()
       .subscribe( resp => {
         console.log(resp);
         this.hoteles = resp;
+      }, err => {
+        console.log(err);
       });
     this.httpService.getAllRestaurantes()
       .subscribe(resp => {

@@ -22,7 +22,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
     ComponentesModule,
     HttpClientModule, 
     IonicModule.forRoot(), 
-    AppRoutingModule, Router],
+    AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },  Geolocation, HttpService],
   bootstrap: [AppComponent],
 })
