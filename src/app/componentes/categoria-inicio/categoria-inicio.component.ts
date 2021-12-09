@@ -30,18 +30,23 @@ export class CategoriaInicioComponent implements OnInit {
   constructor(private httpService: HttpService, private router:Router) { }
 
   ngOnInit() {
+    console.log(this.titulo);
     switch(this.titulo) {
       case "Hoteles":
         this.establecimiento = "Hotel";
         this.establecimientos = this.hoteles;
+        console.log(this.establecimientos);
+        
         break;
       case "Restaurantes":
         this.establecimiento = "Restaurante";
         this.establecimientos = this.restaurantes;
+        console.log(this.establecimientos);
         break;
       case "Casas Rurales":
         this.establecimiento = "Casa Rural";
         this.establecimientos = this.casasRurales;
+        console.log(this.establecimientos);
         break;
     }
     
