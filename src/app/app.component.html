@@ -16,22 +16,22 @@
             <ion-icon name="star-outline" slot="start"></ion-icon>
             <ion-label>Favoritos</ion-label>
           </ion-item>
-          <ion-item [routerDirection]="'root'" [routerLink]="'/resultados'">
+          <ion-item (click)= "goResultados('restaurantes')">
             <ion-icon name="restaurant-outline" slot="start"></ion-icon>
             <ion-label>Restaurantes</ion-label>
             <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
           </ion-item>
-          <ion-item  [routerDirection]="'root'" [routerLink]="'/resultados'">
+          <ion-item  (click)= "goResultados('hoteles')">
             <ion-icon name="bed-outline" slot="start"></ion-icon>
             <ion-label>Hoteles</ion-label>
             <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
           </ion-item>
-          <ion-item  [routerDirection]="'root'" [routerLink]="'/resultados'">
+          <ion-item  (click)= "goResultados('alojamientos')">
             <ion-icon name="home-outline" slot="start"></ion-icon>
             <ion-label>Alojamientos</ion-label>
             <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
           </ion-item>
-          <ion-item  [routerDirection]="'root'" [routerLink]="'/resultados'">
+          <ion-item  (click)= "goResultados('ofertas')">
             <ion-icon name="gift-outline" slot="start"></ion-icon>
             <ion-label>Ofertas</ion-label>
             <ion-icon name="chevron-forward-outline" slot="end"></ion-icon>
