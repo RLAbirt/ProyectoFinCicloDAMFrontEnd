@@ -27,7 +27,8 @@ export class ResultadosComponent implements OnInit {
 
   constructor(
                 private mdlCtrl: ModalController, public navCtrl: NavController, 
-                private httpService: HttpService, private activateRoute: ActivatedRoute) { }
+                private httpService: HttpService, private activateRoute: ActivatedRoute,
+                private geoService:GeolocationService) { }
 
   ngOnInit() {
     this.activateRoute.queryParams.subscribe(
@@ -35,33 +36,33 @@ export class ResultadosComponent implements OnInit {
         this.clase =  params['clase'];
       });
 
-    this.lat = GeolocationService.GetLatitude(); 
+    this.lat = this.geoService.getLatitude(); 
     
-    this.lon = GeolocationService.GetLongitude();
+    this.lon = this.geoService.getLongitude();
 
     if(this.clase == "hoteles"){
       this.httpService.getByGeoHoteles(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
         console.log(resp);
-        this.listado = <Hoteles>resp;
+        this.listado = <Hoteles[]>resp;
       })
     }else if(this.clase == "alojamientos"){
       this.httpService.getByGeoCasasRurales(this.lon,this.lat,this.distSelect, this.tipo)
       .subscribe(resp => {
         console.log(resp);
-        this.listado = <CasasRurales>resp;
+        this.listado = <CasasRurales[]>resp;
       })
     }else if(this.clase == "restaurantes"){
       this.httpService.getByGeoRestaurantes(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
         console.log(resp);
-        this.listado = <Restaurantes>resp;
+        this.listado = <Restaurantes[]>resp;
       })
     }else if(this.clase == "ofertas"){
       this.httpService.getAllOfertas()
       .subscribe(resp => {
         console.log(resp);
-        this.listado = <Ofertas>resp;
+        this.listado = <Ofertas[]>resp;
       })
     }
   }
