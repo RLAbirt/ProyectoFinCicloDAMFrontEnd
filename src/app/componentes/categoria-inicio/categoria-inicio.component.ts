@@ -1,7 +1,9 @@
+import { GeolocationService } from 'src/app/services/geolocation.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
 import { HttpService } from 'src/app/services/http.service';
 import { NavigationExtras, Route, Router } from '@angular/router';
+import  *  as Constants from "../../constants/constants";
 
 @Component({
   selector: 'app-categoria-inicio',
@@ -11,42 +13,70 @@ import { NavigationExtras, Route, Router } from '@angular/router';
 export class CategoriaInicioComponent implements OnInit {
 
   @Input() titulo: string; //Se convertirá en un objeto establecimiento para rellenar las tarjetas
-  establecimientos: any[] = ['',''];
+  @Input() hoteles: Hoteles[]= [];
+  @Input() casasRurales: CasasRurales[] = [];
+  @Input() restaurantes: Restaurantes[] = [];
+  
+
   slideOpts = {
     initialSlide: 0,
     speed: 400,
     slidesPerView: 2,
   };
+  establecimientos: any[] = [];
+  establecimiento:string = "";
+  enlace:string="";
+  rutaImg:string="";
+  nombreIcono:string="";
+  longitud: number;
+  latitud: number;
 
-  @Input() hoteles: Hoteles[]= [];
-  @Input() casasRurales: CasasRurales[] = [];
-  @Input() restaurantes: Restaurantes[] = []; 
-
-  establecimiento:String = "";
-  enlace:String="";
-
-
-
-  constructor(private httpService: HttpService, private router:Router) { }
+  constructor(private httpService: HttpService, private router:Router, private geoService:GeolocationService) { }
 
   ngOnInit() {
-    console.log(this.titulo);
+
+    this.getPosicion();
+
     switch(this.titulo) {
-      case "Hoteles":
+      case "hoteles":
         this.establecimiento = "Hotel";
-        this.establecimientos = this.hoteles;
+
+        this.httpService.getAllHoteles()
+          .subscribe(resp => {
+            this.establecimientos = resp.slice(0,2);
+          });
+
         console.log(this.establecimientos);
+
+        this.rutaImg = Constants.IMG_HOTEL;
+        this.nombreIcono = Constants.ICON_HOTEL;
         
         break;
-      case "Restaurantes":
+      case "restaurantes":
         this.establecimiento = "Restaurante";
-        this.establecimientos = this.restaurantes;
+
+        this.httpService.getAllRestaurantes()
+          .subscribe(resp => {
+            this.establecimientos = resp.slice(0,2);
+          });
+
         console.log(this.establecimientos);
+
+        this.rutaImg = Constants.IMG_RESTAURANT;
+        this.nombreIcono = Constants.ICON_RESTAURANT;
         break;
-      case "Casas Rurales":
+      case "casas rurales":
         this.establecimiento = "Casa Rural";
-        this.establecimientos = this.casasRurales;
+
+        this.httpService.getByTypeCasasRurales("Agroturismos")
+          .subscribe(resp => {
+            this.establecimientos = resp.slice(0,2);
+          });
+
         console.log(this.establecimientos);
+
+        this.rutaImg = Constants.IMG_RURAL;
+        this.nombreIcono = Constants.ICON_RURAL;
         break;
     }
     
@@ -63,6 +93,8 @@ export class CategoriaInicioComponent implements OnInit {
       }
     }
 
+    console.log(index, this.establecimientos[index]);
+
     this.router.navigate(['/detalle-resultados'], navExtras);
   }
 
@@ -72,9 +104,29 @@ export class CategoriaInicioComponent implements OnInit {
   abreResultado() {
     let navExtras:NavigationExtras = {
       queryParams: {
-        tipo: this.establecimiento
+        clase: this.establecimiento
       }
     }
     this.router.navigate(['/resultados'], navExtras);
+  }
+
+  /**
+   * Llama a calcular la distancia entre la localización del usuario y el establecimiento a mostrar
+   * y la devuelve para mostrarlo en pantalla.
+   * @param index 
+   * @returns number
+   */
+  muestraDistancia( index:number ) : number {
+    return this.geoService.calculaDistancia(this.longitud, this.latitud, 
+      this.establecimientos[index].geometry.coordinates[0], this.establecimientos[index].geometry.coordinates[1]);
+  }
+
+  /**
+   * Llama al servicio para que recoja las coordenadas del usuario y las asigna a variables.
+   */
+  getPosicion() {
+    this.geoService.actualizarPosicion();
+    this.longitud = this.geoService.getLongitude();
+    this.latitud = this.geoService.getLatitude();
   }
 }

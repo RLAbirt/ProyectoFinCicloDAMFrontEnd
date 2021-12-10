@@ -2,8 +2,8 @@
   <ion-row class="ion-align-items-start">
     <ion-col size="12">
       <div class="home-title">
-        <ion-icon class="home-title-icon" slot="start" name="bed-outline"></ion-icon>
-        <h5 class="title-label">{{titulo}}</h5>
+        <ion-icon class="home-title-icon" slot="start" [name]="this.nombreIcono"></ion-icon>
+        <h5 class="title-label">{{titulo |titlecase}}</h5>
       </div>  
     </ion-col>
   </ion-row>
@@ -11,15 +11,15 @@
       <ion-slides pager="false" [options]="slideOpts">
         <ion-slide *ngFor="let item of establecimientos; let i = index">
           <ion-card (click)="abreDetalle(i)">
-            <ion-img src="../../assets/images/hotel.jpg"></ion-img>
+            <ion-img [src]="rutaImg"></ion-img>
             <ion-card-header>
               <ion-card-subtitle>
                 <div class="card-icon-label">
                   <ion-icon class="card-icon" name="bed"></ion-icon>
-                  <span class="card-label">{{establecimiento}}</span>
+                  <span class="card-label">{{establecimiento |titlecase}}</span>
                 </div>   
               </ion-card-subtitle>
-              <ion-card-title>{{item.properties.documentname}}</ion-card-title>
+              <ion-card-title>{{item.properties.documentname |titlecase}}</ion-card-title>
             </ion-card-header>
             <ion-card-content>
               <div>
@@ -27,9 +27,13 @@
                   <ion-icon name="navigate" color="dark"></ion-icon>
                   <ion-label>5km</ion-label>
                 </ion-chip>
-                <ion-chip>
+                <ion-chip *ngIf="titulo !== 'restaurantes'">
                   <ion-icon name="star" color="dark"></ion-icon>
-                  <ion-label>5</ion-label>
+                  <ion-label>{{item.properties.category}}</ion-label>
+                </ion-chip>
+                <ion-chip *ngIf="titulo === 'restaurantes'">
+                  <ion-icon name="people-outline" color="dark"></ion-icon>
+                  <ion-label>{{muestraDistancia(i)|number}}</ion-label>
                 </ion-chip>
               </div>
             </ion-card-content>
