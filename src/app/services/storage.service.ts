@@ -18,8 +18,6 @@ export class StorageService {
   private casasRuralesFavoritos:CasasRurales[]; 
   private ofertasFavoritos:Ofertas[]; 
   
-
-
   constructor() 
   { 
     this.obtenerFavoritos(); 
@@ -89,7 +87,7 @@ export class StorageService {
   {
     // Obtenemos la promesa que devuelve getObject()
     // Debemos indicar el tipo de dato que estamos leyendo
-    let datosPromesa: Promise<Hoteles[]> = this.getObject(this.keyRestaurantes);
+    let datosPromesa: Promise<Restaurantes[]> = this.getObject(this.keyRestaurantes);
     // Con then() ejecutamos el código que queremos que procese los datos recibidos
     datosPromesa.then( (data) => {
       if(data) {
