@@ -1,3 +1,4 @@
+import { StorageService } from './../../services/storage.service';
 import { GeolocationService } from './../../services/geolocation.service';
 import { HttpService } from './../../services/http.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,7 +19,7 @@ export class HomePage implements OnInit {
   casasRurales: CasasRurales[] = [];
   ofertas: Ofertas[] = [];
 
-  constructor(private httpService:HttpService, private geoService:GeolocationService) {}
+  constructor(private httpService:HttpService, private geoService:GeolocationService, private storageService:StorageService) {}
 
   ngOnInit(): void {
     this.getPosicion();
@@ -46,5 +47,9 @@ export class HomePage implements OnInit {
 
   getPosicion() {
     this.geoService.actualizarPosicion();
+  }
+
+  gestionarAlmacenamiento() {
+    this.storageService.probarAlmacenamiento(); 
   }
 }
