@@ -9,14 +9,12 @@ import { ResultadosComponent } from './resultados/resultados.component';
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CategoriaInicioComponent } from './categoria-inicio/categoria-inicio.component';
 import { DetalleComponent } from './detalle/detalle.component'
 
 
 
 @NgModule({
   declarations: [
-    CategoriaInicioComponent,
     CategoriaInicioHotelesComponent,
     CategoriaInicioRestaurantesComponent,
     CategoriaInicioRuralesComponent,
@@ -31,7 +29,6 @@ import { DetalleComponent } from './detalle/detalle.component'
     PipesModule
   ],
   exports: [
-    CategoriaInicioComponent,
     CategoriaInicioHotelesComponent,
     CategoriaInicioRestaurantesComponent,
     CategoriaInicioRuralesComponent,

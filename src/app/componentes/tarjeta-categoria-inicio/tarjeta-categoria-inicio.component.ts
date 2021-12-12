@@ -23,7 +23,7 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
 
   ngOnInit() {
     this.distancia = this.muestraDistancia();
-    switch(this.tipo) {
+    switch(this.tipo.toLowerCase()) {
       case 'hoteles':
         this.rutaImg = Constants.IMG_HOTEL;
         break;

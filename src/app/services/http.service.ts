@@ -29,7 +29,7 @@ export class HttpService {
     paramsGH.append('lon',lon);
     paramsGH.append('lat', lat);
     paramsGH.append('dist', dist);
-
+    
     return this.http.get<Hoteles[]>(`/api/hoteles/geo?dist=${dist}&lat=${lat}&lon=${lon}`);
   }
 
