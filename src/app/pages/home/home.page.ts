@@ -12,17 +12,12 @@ import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/be
 export class HomePage implements OnInit {
 
   categorias: string[] = ['hoteles', 'restaurantes', 'casas rurales'];
-  hoteles: Hoteles[] = [];
-  restaurantes: Restaurantes[] = [];
-  casasRurales: CasasRurales[] = [];
-  ofertas: Ofertas[] = [];
   longitud: number = 0;
   latitud: number = 0;
 
   constructor(private httpService:HttpService, private geoService:GeolocationService) {}
 
   ngOnInit(): void {
-    
   }
 
   

@@ -1,0 +1,38 @@
+<ion-card (click)="abreDetalle()">
+  <ion-img [src]="rutaImg"></ion-img>
+  <ion-card-header>
+    <ion-card-subtitle>
+      <div class="card-icon-label">
+        <ion-icon class="card-icon" name="bed"></ion-icon>
+        <span class="card-label">{{tipo |titlecase}}</span>
+      </div>   
+    </ion-card-subtitle>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <h2>{{establecimiento.properties.documentname |titlecase}}</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col size="6">
+          <ion-chip>
+            <ion-icon name="navigate" color="dark"></ion-icon>
+            <ion-label>{{ distancia|distancia }}</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col size="6">
+          <ion-chip *ngIf="tipo !== 'restaurantes'">
+            <ion-icon name="star-outline" color="dark"></ion-icon>
+            <ion-label>{{establecimiento.properties.category}}</ion-label>
+          </ion-chip>
+          <ion-chip *ngIf="tipo === 'restaurantes'">
+            <ion-icon name="people-outline" color="dark"></ion-icon>
+            <ion-label>{{establecimiento.properties.capacity}}</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

@@ -1,0 +1,37 @@
+h2 {
+    color: black !important;
+}
+
+ion-grid {
+    height: 100%;
+    ion-row {
+        height: 50%;
+    }
+
+    ion-col {
+        margin: 0 !important;
+    }
+}
+
+ion-chip {
+    overflow-x: visible;
+}
+
+ion-card-content {
+    padding: 0 !important;
+}
+
+ion-chip {
+
+   // padding: 1 !important;
+
+    ion-icon {
+        font-size: x-small !important;
+    }
+    
+    ion-label {
+        font-size: x-small !important;
+        
+    }
+}
+

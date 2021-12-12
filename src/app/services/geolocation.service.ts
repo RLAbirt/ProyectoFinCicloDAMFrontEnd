@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs';
+import 'rxjs/add/observable/fromPromise';
 import { Injectable } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -9,24 +11,20 @@ export class GeolocationService {
   private latitude: number = 0; 
   private longitude: number = 0; 
 
-  constructor(private geolocation: Geolocation) 
-  { 
-    this.actualizarPosicion();
-  }
+  constructor(private geolocation: Geolocation) { }
 
-  public actualizarPosicion(): void
+  public actualizarPosicion() //: Observable<Geoposition>
   {
-    this.geolocation.getCurrentPosition({maximumAge: 5000, timeout: 5000, 
-      enableHighAccuracy: false})
-            .then((resp) => {
-              
-              this.latitude = resp.coords.latitude; 
-              this.longitude = resp.coords.longitude;
-              console.log(this.latitude);
-              console.log(this.longitude);
-             }).catch((error) => {
-                 console.log('Error getting location', error);
-             });
+    return this.geolocation.getCurrentPosition({maximumAge: 5000, timeout: 5000, 
+        enableHighAccuracy: false})
+          .then((resp) => {
+            
+            this.latitude = resp.coords.latitude; 
+            this.longitude = resp.coords.longitude;
+  
+            }).catch((error) => {
+                console.log('Error getting location', error);
+            });
   }
 
   public getLatitude(): number
@@ -50,10 +48,14 @@ export class GeolocationService {
     ; 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     var d = R * c; // Distance in km
-    return d;
+    console.log('d',d);
+    var e = Math.round(d*10)/10;
+    console.log('round',e);
+
+    return e;
   }
 
   public deg2rad(deg) {
-    return deg * (Math.PI/180)
+    return deg * (Math.PI/180);
   }
 }

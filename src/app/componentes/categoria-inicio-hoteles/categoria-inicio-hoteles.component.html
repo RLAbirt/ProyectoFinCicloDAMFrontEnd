@@ -1,0 +1,31 @@
+<ion-grid>
+  <ion-row class="ion-align-items-start">
+    <ion-col size="12">
+      <div class="home-title">
+        <ion-icon class="home-title-icon" slot="start" [name]="this.nombreIcono"></ion-icon>
+        <h5 class="title-label">{{titulo |titlecase}}</h5>
+      </div>  
+    </ion-col>
+  </ion-row>
+  <ion-row class="main-card">
+      <ion-slides pager="false" [options]="slideOpts">
+        <ion-slide class="card-indv" *ngFor="let item of hoteles; let i = index">
+          <app-tarjeta-categoria-inicio
+            [establecimiento]="item"
+            [tipo]="titulo"
+            [longitud]="longitud"
+            [latitud]="latitud"></app-tarjeta-categoria-inicio>
+        </ion-slide>
+        <ion-slide>
+          <ion-card (click)="abreResultado()" class="card-ver-mas">
+            <ion-card-content>
+              <div class="card-ver-mas-content">
+                <p>Ver más</p>
+                <ion-icon name="arrow-forward-circle-outline"></ion-icon>
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+  </ion-row>
+</ion-grid>

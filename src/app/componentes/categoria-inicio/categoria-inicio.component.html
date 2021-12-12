@@ -25,7 +25,7 @@
               <div>
                 <ion-chip>
                   <ion-icon name="navigate" color="dark"></ion-icon>
-                  <ion-label>5km</ion-label>
+                  <ion-label>{{muestraDistancia(i)|number}}</ion-label>
                 </ion-chip>
                 <ion-chip *ngIf="titulo !== 'restaurantes'">
                   <ion-icon name="star" color="dark"></ion-icon>
@@ -33,7 +33,7 @@
                 </ion-chip>
                 <ion-chip *ngIf="titulo === 'restaurantes'">
                   <ion-icon name="people-outline" color="dark"></ion-icon>
-                  <ion-label>{{muestraDistancia(i)|number}}</ion-label>
+                  <ion-label>{{item.properties.capacity}}</ion-label>
                 </ion-chip>
               </div>
             </ion-card-content>

@@ -17,7 +17,7 @@ export class HttpService {
   constructor(private http:HttpClient) { }
 
   public getAllOfertas() :Observable<Ofertas[]>{
-    return this.http.get<Ofertas[]>('/api/ofertas')
+    return this.http.get<Ofertas[]>('/api/ofertas');
   }
 
   public getAllHoteles() :Observable<Hoteles[]> {
@@ -30,7 +30,7 @@ export class HttpService {
     paramsGH.append('lat', lat);
     paramsGH.append('dist', dist);
 
-    return this.http.get<Hoteles[]>('/api/hoteles/geo',{params: paramsGH});
+    return this.http.get<Hoteles[]>(`/api/hoteles/geo?dist=${dist}&lat=${lat}&lon=${lon}`);
   }
 
   public getAllCasasRurales():Observable<CasasRurales[]> {
@@ -53,7 +53,7 @@ export class HttpService {
     paramsGC.append('dist', dist);
     paramsGC.append('type', tipo);
 
-    return this.http.get<CasasRurales[]>('/api/casasrurales/geo', {params: paramsGC});
+    return this.http.get<Hoteles[]>(`/api/casasrurales/geo?dist=${dist}&lat=${lat}&lon=${lon}&type=${tipo}`);
   }
 
   public getAllRestaurantes(): Observable<Restaurantes[]> {
@@ -66,7 +66,7 @@ export class HttpService {
     paramsGR.append('lat', lat);
     paramsGR.append('dist', dist);
 
-    return this.http.get<Restaurantes[]>('/api/restaurantes/geo', {params: paramsGR});
+    return this.http.get<Hoteles[]>(`/api/restaurantes/geo?dist=${dist}&lat=${lat}&lon=${lon}`);
   }
 
   private handleError(err: HttpErrorResponse){

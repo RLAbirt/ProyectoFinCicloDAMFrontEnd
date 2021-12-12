@@ -8,13 +8,10 @@
 </ion-header>
 
 <ion-content class="container" [fullscreen]="true">
-  <app-categoria-inicio 
-      [titulo]="categorias[0]"
-      [hoteles]="hoteles"></app-categoria-inicio>
-  <app-categoria-inicio 
-      [titulo]="categorias[1]"
-      [restaurantes]="restaurantes"></app-categoria-inicio>
-  <app-categoria-inicio 
-      [titulo]="categorias[2]"
-      [casasRurales]="casasRurales"></app-categoria-inicio>
+  <app-categoria-inicio-hoteles 
+      [titulo]="categorias[0]"></app-categoria-inicio-hoteles>
+  <app-categoria-inicio-restaurantes 
+      [titulo]="categorias[1]"></app-categoria-inicio-restaurantes>
+  <app-categoria-inicio-rurales 
+      [titulo]="categorias[2]"></app-categoria-inicio-rurales>
 </ion-content>

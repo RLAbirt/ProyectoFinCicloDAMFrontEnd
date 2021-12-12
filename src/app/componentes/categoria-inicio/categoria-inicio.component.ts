@@ -13,40 +13,47 @@ import  *  as Constants from "../../constants/constants";
 export class CategoriaInicioComponent implements OnInit {
 
   @Input() titulo: string; //Se convertirá en un objeto establecimiento para rellenar las tarjetas
-  @Input() hoteles: Hoteles[]= [];
-  @Input() casasRurales: CasasRurales[] = [];
-  @Input() restaurantes: Restaurantes[] = [];
-  
-
   slideOpts = {
     initialSlide: 0,
     speed: 400,
     slidesPerView: 2,
   };
   establecimientos: any[] = [];
+  hoteles: Hoteles[]= [];
+  casasRurales: CasasRurales[] = [];
+  restaurantes: Restaurantes[] = [];
   establecimiento:string = "";
   enlace:string="";
   rutaImg:string="";
   nombreIcono:string="";
-  longitud: number;
-  latitud: number;
+  longitud: number = 0;
+  latitud: number = 0;
 
   constructor(private httpService: HttpService, private router:Router, private geoService:GeolocationService) { }
 
   ngOnInit() {
+    this.geoService.actualizarPosicion()
+     .then(() => {
+        this.latitud = this.geoService.getLatitude();
+        this.longitud = this.geoService.getLongitude();
+        this.cargaComponente();
+      });
+      
+  }
 
-    this.getPosicion();
-
+  cargaComponente() {
     switch(this.titulo) {
       case "hoteles":
         this.establecimiento = "Hotel";
 
-        this.httpService.getAllHoteles()
+        this.httpService.getByGeoHoteles(this.longitud, this.latitud, 1)
           .subscribe(resp => {
-            this.establecimientos = resp.slice(0,2);
+            this.hoteles = resp.slice(0,2);
+            console.log(this.hoteles);
+            this.establecimientos = this.hoteles;
           });
 
-        console.log(this.establecimientos);
+        console.log(this.hoteles);
 
         this.rutaImg = Constants.IMG_HOTEL;
         this.nombreIcono = Constants.ICON_HOTEL;
@@ -55,12 +62,13 @@ export class CategoriaInicioComponent implements OnInit {
       case "restaurantes":
         this.establecimiento = "Restaurante";
 
-        this.httpService.getAllRestaurantes()
+        this.httpService.getByGeoRestaurantes(this.longitud, this.latitud, 1000)
           .subscribe(resp => {
-            this.establecimientos = resp.slice(0,2);
+            this.restaurantes = resp.slice(0,2);
+            this.establecimientos = this.hoteles;
           });
 
-        console.log(this.establecimientos);
+        console.log(this.restaurantes);
 
         this.rutaImg = Constants.IMG_RESTAURANT;
         this.nombreIcono = Constants.ICON_RESTAURANT;
@@ -68,18 +76,18 @@ export class CategoriaInicioComponent implements OnInit {
       case "casas rurales":
         this.establecimiento = "Casa Rural";
 
-        this.httpService.getByTypeCasasRurales("Agroturismos")
+        this.httpService.getByGeoCasasRurales(this.longitud, this.latitud, 1000, "Agroturismos")
           .subscribe(resp => {
-            this.establecimientos = resp.slice(0,2);
+            this.casasRurales = resp.slice(0,2);
+            this.establecimientos = this.hoteles;
           });
 
-        console.log(this.establecimientos);
+        console.log(this.casasRurales);
 
         this.rutaImg = Constants.IMG_RURAL;
         this.nombreIcono = Constants.ICON_RURAL;
         break;
     }
-    
   }
 
   /**
@@ -124,9 +132,13 @@ export class CategoriaInicioComponent implements OnInit {
   /**
    * Llama al servicio para que recoja las coordenadas del usuario y las asigna a variables.
    */
-  getPosicion() {
-    this.geoService.actualizarPosicion();
-    this.longitud = this.geoService.getLongitude();
-    this.latitud = this.geoService.getLatitude();
-  }
+  /* getPosicion() {
+    this.geoService.actualizarPosicion()
+      .subscribe(resp => {
+        this.latitud = resp.coords.latitude;
+        this.longitud = resp.coords.longitude;
+        console.log(resp);
+      })
+    
+  } */
 }

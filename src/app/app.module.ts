@@ -1,3 +1,5 @@
+import { DistanciaPipe } from './pipes/distancia.pipe';
+import { PipesModule } from './pipes/pipes.module';
 import { ComponentesModule } from './componentes/componentes.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -9,7 +11,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { Router } from '@angular/router';
 
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 
@@ -20,7 +21,8 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
   imports: [
     BrowserModule, 
     ComponentesModule,
-    HttpClientModule, 
+    HttpClientModule,
+    PipesModule, 
     IonicModule.forRoot(), 
     AppRoutingModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },  Geolocation, HttpService],
