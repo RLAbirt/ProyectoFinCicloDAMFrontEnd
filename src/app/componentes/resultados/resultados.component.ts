@@ -1,3 +1,4 @@
+import { AVA_HOTEL, AVA_OFERTA, AVA_RESTAURANT, AVA_RURAL } from './../../constants/constants';
 import { ModalController, NavController } from '@ionic/angular';
 import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
 import { HttpService } from 'src/app/services/http.service';
@@ -17,12 +18,13 @@ export class ResultadosComponent implements OnInit {
 
 
   @Input() listado: any;
-           distSelect: number = SelectorComponent.getDistance();
+           distSelect: number = 20;
            lon: number;
            lat: number;
            tipo: string;
            clase: string;
            seleccion: any;
+           image: any;
 
 
   constructor(
@@ -35,48 +37,47 @@ export class ResultadosComponent implements OnInit {
       params => {
         this.clase =  params['clase'];
       });
-
+    console.log(this.clase);    
     this.lat = this.geoService.getLatitude(); 
-    
+    console.log(this.lat);
     this.lon = this.geoService.getLongitude();
-
+    console.log(this.lon); 
+    //this.distSelect = SelectorComponent.getDistance();
+    console.log(this.distSelect); 
+   
     if(this.clase == "hoteles"){
       this.httpService.getByGeoHoteles(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
         console.log(resp);
+        this.image = AVA_HOTEL;
         this.listado = <Hoteles[]>resp;
       })
     }else if(this.clase == "alojamientos"){
       this.httpService.getByGeoCasasRurales(this.lon,this.lat,this.distSelect, this.tipo)
       .subscribe(resp => {
         console.log(resp);
+        this.image = AVA_RURAL;
         this.listado = <CasasRurales[]>resp;
       })
     }else if(this.clase == "restaurantes"){
       this.httpService.getByGeoRestaurantes(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
         console.log(resp);
+        this.image = AVA_RESTAURANT;
         this.listado = <Restaurantes[]>resp;
       })
     }else if(this.clase == "ofertas"){
       this.httpService.getAllOfertas()
       .subscribe(resp => {
         console.log(resp);
+        this.image = AVA_OFERTA;
         this.listado = <Ofertas[]>resp;
       })
     }
   }
 
-  private calculateDistance(lon1, lon2, lat1, lat2){
-    let p = 0.017453292519943295;
-    let c = Math.cos;
-    let a = 0.5 - c((lat1-lat2) * p) / 2 + c(lat2 * p) *c((lat1) * p) * (1 - c(((lon1- lon2) * p))) / 2;
-    let dis = (12742 * Math.asin(Math.sqrt(a)));
-    return Math.trunc(dis);
-  }
-
-  public getGeolocation(latDestino: number, lonDestino: number){
-    return this.calculateDistance(this.lon, lonDestino, this.lat, latDestino);
+  public muestraDistancia(latDestino: number, lonDestino: number){
+    return this.geoService.calculaDistancia(this.lon, this.lat, lonDestino, latDestino);
   }
 
   async abrirModal(id: any){
@@ -88,15 +89,15 @@ export class ResultadosComponent implements OnInit {
 
     const modal = await this.mdlCtrl.create({
       component: DetalleResultadosPage,
+      componentProps: {
+        'municipio': [this.seleccion.properties.municipality],
+        'terriotorio': [this.seleccion.properties.territory],
+        'nombre': [this.seleccion.properties.documentname],
+        'descripcion': [this.seleccion.properties.turismdescription],
+        'web': [this.seleccion.properties.web],
+        'clase': [this.clase],
+      },
       cssClass: 'my-custom-class',
-        componentProps: {
-          'municipio': this.seleccion.properties.municipality,
-          'terriotorio': this.seleccion.properties.territory,
-          'nombre': this.seleccion.properties.documentname,
-          'descripcion': this.seleccion.properties.turismdescription,
-          'web': this.seleccion.properties.web,
-        }
-
     });
 
     await modal.present();

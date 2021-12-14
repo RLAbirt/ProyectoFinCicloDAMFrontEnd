@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import * as Constants from '../../constants/constants';
 
 @Component({
   selector: 'app-detalle',
@@ -14,9 +15,24 @@ export class DetalleComponent implements OnInit {
   @Input() nombre: string;
   @Input() descripcion: string;
   @Input() web: string;
+  @Input() clase: string;
+            rutaImg: any;
   
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    console.log(`${this.municipio} ${this.territorio}`)
+    switch(this.clase.toLowerCase()) {
+      case 'hoteles':
+        this.rutaImg = Constants.IMG_HOTEL;
+        break;
+      case 'restaurantes':
+        this.rutaImg = Constants.IMG_RESTAURANT;
+        break;
+      case 'casas rurales':
+        this.rutaImg = Constants.IMG_RURAL;
+        break;
+    }
+  }
 
 }
