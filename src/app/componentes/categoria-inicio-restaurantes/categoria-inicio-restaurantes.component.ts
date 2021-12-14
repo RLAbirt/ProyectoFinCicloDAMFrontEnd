@@ -41,7 +41,7 @@ export class CategoriaInicioRestaurantesComponent implements OnInit {
 
     this.establecimiento = "Restaurante";
 
-    this.httpService.getByGeoRestaurantes(this.longitud, this.latitud, 1)
+    this.httpService.getByGeoRestaurantes(this.longitud, this.latitud, 20)
       .subscribe(resp => {
         this.restaurantes = resp.slice(0,2);
       });

@@ -42,7 +42,7 @@ export class CategoriaInicioHotelesComponent implements OnInit {
 
       this.establecimiento = "Hotel";
 
-      this.httpService.getByGeoHoteles(this.longitud, this.latitud, 1)
+      this.httpService.getByGeoHoteles(this.longitud, this.latitud, 20)
         .subscribe(resp => {
           this.hoteles = resp.slice(0,2);
         });
