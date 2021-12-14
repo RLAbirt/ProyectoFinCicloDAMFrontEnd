@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectorComponent implements OnInit {
 
-  static valueSelected: string = "1";
+  static valueSelected: string = "20";
 
   constructor() { }
 
