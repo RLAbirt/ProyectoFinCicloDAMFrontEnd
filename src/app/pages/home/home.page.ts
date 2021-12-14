@@ -23,26 +23,6 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.getPosicion();
-    
-    this.httpService.getAllHoteles()
-      .subscribe( resp => {
-        console.log(resp);
-        this.hoteles = resp;
-      }, err => {
-        console.log(err);
-      });
-    this.httpService.getAllRestaurantes()
-      .subscribe(resp => {
-        this.restaurantes = resp.slice(0,2);
-      });
-    this.httpService.getAllCasasRurales()
-      .subscribe( resp => {
-        this.casasRurales = resp.slice(0,2);
-      } );
-    this.httpService.getAllOfertas()
-      .subscribe( resp => {
-        this.ofertas = resp.slice(0,2);
-      });
   }
 
   getPosicion() {
