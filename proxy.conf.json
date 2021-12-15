@@ -1,11 +1,11 @@
 {
     "/api":{
-        "target": "http://10.2.106.162.labs.birt.eus",
+        "target": "http://10.2.106.162.labs.birt.eus:80/api",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug",
         "pathRewrite": {
-            "^/api": "http://10.2.106.162.labs.birt.eus/api"
+            "^/api": "http://10.2.106.162.labs.birt.eus"
           }
     }
 }
