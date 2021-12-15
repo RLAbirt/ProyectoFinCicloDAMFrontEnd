@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { SelectorComponent } from '../selector/selector.component';
+import { DistService } from 'src/app/services/dist.service';
 
 @Component({
   selector: 'app-resultados-list',
@@ -16,9 +17,9 @@ import { SelectorComponent } from '../selector/selector.component';
 })
 export class ResultadosComponent implements OnInit {
 
-
+  //@Input() valueSelected:any;
   @Input() listado: any;
-           distSelect: number = 20;
+           distSelect: number;
            lon: number;
            lat: number;
            tipo: string;
@@ -30,21 +31,31 @@ export class ResultadosComponent implements OnInit {
   constructor(
                 private mdlCtrl: ModalController, public navCtrl: NavController, 
                 private httpService: HttpService, private activateRoute: ActivatedRoute,
-                private geoService:GeolocationService) { }
+                private geoService:GeolocationService, private distService: DistService) { }
 
   ngOnInit() {
+    
     this.activateRoute.queryParams.subscribe(
       params => {
         this.clase =  params['clase'];
+        this.loadPage();
       });
-    console.log(this.clase);    
+    console.log(this.clase);  
+    
     this.lat = this.geoService.getLatitude(); 
     console.log(this.lat);
+
     this.lon = this.geoService.getLongitude();
     console.log(this.lon); 
-    //this.distSelect = SelectorComponent.getDistance();
+    
+    this.distSelect = 1;
+    //this.distSelect = this.distService.getData();
     console.log(this.distSelect); 
-   
+      
+    this.loadPage();
+  }
+
+  private loadPage(){
     if(this.clase == "hoteles"){
       this.httpService.getByGeoHoteles(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
