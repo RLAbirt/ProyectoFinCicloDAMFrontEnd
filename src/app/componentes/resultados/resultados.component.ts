@@ -31,7 +31,7 @@ export class ResultadosComponent implements OnInit {
   constructor(
                 private mdlCtrl: ModalController, public navCtrl: NavController, 
                 private httpService: HttpService, private activateRoute: ActivatedRoute,
-                private geoService:GeolocationService, private distService: DistService) { }
+                private geoService:GeolocationService) { }
 
   ngOnInit() {
     
@@ -48,7 +48,7 @@ export class ResultadosComponent implements OnInit {
     this.lon = this.geoService.getLongitude();
     console.log(this.lon); 
     
-    this.distSelect = 1;
+    this.distSelect = 20;
     //this.distSelect = this.distService.getData();
     console.log(this.distSelect); 
       
