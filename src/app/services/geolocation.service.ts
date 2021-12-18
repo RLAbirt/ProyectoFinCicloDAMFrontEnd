@@ -48,9 +48,9 @@ export class GeolocationService {
     ; 
     var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
     var d = R * c; // Distance in km
-    console.log('d',d);
+    //console.log('d',d);
     var e = Math.round(d*10)/10;
-    console.log('round',e);
+    //console.log('round',e);
 
     return e;
   }

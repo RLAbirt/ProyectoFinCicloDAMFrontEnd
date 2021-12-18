@@ -8,6 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { SelectorComponent } from '../selector/selector.component';
 import { DistService } from 'src/app/services/dist.service';
+import { NavigationExtras, Route, Router } from '@angular/router';
 
 @Component({
   selector: 'app-resultados-list',
@@ -29,7 +30,7 @@ export class ResultadosComponent implements OnInit {
 
 
   constructor(
-                private mdlCtrl: ModalController, public navCtrl: NavController, 
+                private router:Router, public navCtrl: NavController, 
                 private httpService: HttpService, private activateRoute: ActivatedRoute,
                 private geoService:GeolocationService) { }
 
@@ -91,18 +92,50 @@ export class ResultadosComponent implements OnInit {
     return this.geoService.calculaDistancia(this.lon, this.lat, lonDestino, latDestino);
   }
 
-  async abrirModal(id: any){
+  public abrirModal(id: any){
     for (let i=0; i < this.listado.length; i++){
       if(this.listado[i]._id== id){
         this.seleccion = this.listado[i];
       }
     }
 
+    console.log(this.seleccion.properties.municipality);
+    console.log(this.seleccion.properties.territory);
+    console.log(this.seleccion.properties.documentname); 
+    console.log(this.seleccion.properties.turismdescription); 
+    console.log(this.seleccion.properties.web); 
+    console.log(this.clase); 
+
+    let navExtras:NavigationExtras = {
+      queryParams: {
+        municipio: this.seleccion.properties.municipality,
+        territorio: this.seleccion.properties.territory,
+        nombre: this.seleccion.properties.documentname,
+        descripcion: this.seleccion.properties.turismdescription,
+        web: this.seleccion.properties.web,
+        clase: this.clase
+      }
+    }
+    this.router.navigate(['/detalle-resultados'], navExtras);
+
+    /*
+    //PRUEBA DE MODAL BÁSICA DE PABLO
+    const modal = await this.mdlCtrl.create({
+      component: DetalleResultadosPage,      
+    }); 
+
+    await modal.present();
+    const {data} = await modal.onWillDismiss()
+    console.log (data); 
+    */
+
+    /*
+    //CODIGO ORIGINAL DE ROCIO
     const modal = await this.mdlCtrl.create({
       component: DetalleResultadosPage,
       componentProps: {
         'municipio': [this.seleccion.properties.municipality],
-        'terriotorio': [this.seleccion.properties.territory],
+        'territorio': [this.seleccion.properties.territory],
         'nombre': [this.seleccion.properties.documentname],
         'descripcion': [this.seleccion.properties.turismdescription],
         'web': [this.seleccion.properties.web],
@@ -112,5 +145,7 @@ export class ResultadosComponent implements OnInit {
     });
 
     await modal.present();
+    */
   }
+  
 }

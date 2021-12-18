@@ -1,5 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as Constants from '../../constants/constants';
+import { ModalController } from '@ionic/angular'; 
+import { NavigationExtras, Route, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalle',
@@ -18,9 +21,19 @@ export class DetalleComponent implements OnInit {
   @Input() clase: string;
             rutaImg: any;
   
-  constructor() { }
+  constructor(private router:Router, private activateRoute: ActivatedRoute) { }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.activateRoute.queryParams.subscribe(
+      params => {
+        this.municipio = params['municipio'];
+        this.territorio = params['territorio'];
+        this.nombre = params['nombre'];
+        this.descripcion = params['nombre'];
+        this.web = params['web'];
+        this.clase =  params['clase'];
+      });
+    console.log(this.clase);  
     console.log(`${this.municipio} ${this.territorio}`)
     switch(this.clase.toLowerCase()) {
       case 'hoteles':
@@ -34,5 +47,13 @@ export class DetalleComponent implements OnInit {
         break;
     }
   }
+
+
+  /* PRUEBA DE MODAL BASICA DE PABLO
+  dismiss() {
+    console.log ("Cerrar Modal"); 
+    this.modalCTRL.dismiss({dismissed: true});
+  }
+  */
 
 }
