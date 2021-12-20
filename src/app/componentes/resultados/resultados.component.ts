@@ -1,12 +1,13 @@
 import { AVA_HOTEL, AVA_OFERTA, AVA_RESTAURANT, AVA_RURAL } from './../../constants/constants';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { HttpService } from 'src/app/services/http.service';
 import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { NavigationExtras, Router } from '@angular/router';
 import  *  as Constants from "../../constants/constants";
+import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
 
 @Component({
   selector: 'app-resultados-list',
@@ -29,7 +30,7 @@ export class ResultadosComponent implements OnInit {
   constructor(
                 private router:Router, public navCtrl: NavController, 
                 private httpService: HttpService, private activateRoute: ActivatedRoute,
-                private geoService:GeolocationService) { }
+                private geoService:GeolocationService, private modalController:ModalController) { }
 
   ngOnInit() {
     
@@ -90,60 +91,21 @@ export class ResultadosComponent implements OnInit {
     this.loadPage();
   }
 
-  public abrirModal(id: any){
-    for (let i=0; i < this.listado.length; i++){
-      if(this.listado[i]._id== id){
-        this.seleccion = this.listado[i];
-      }
-    }
-
-    console.log(this.seleccion.properties.municipality);
-    console.log(this.seleccion.properties.territory);
-    console.log(this.seleccion.properties.documentname); 
-    console.log(this.seleccion.properties.turismdescription); 
-    console.log(this.seleccion.properties.web); 
-    console.log(this.clase); 
-
-    let navExtras:NavigationExtras = {
-      queryParams: {
-        municipio: this.seleccion.properties.municipality,
-        territorio: this.seleccion.properties.territory,
-        nombre: this.seleccion.properties.documentname,
-        descripcion: this.seleccion.properties.turismdescription,
-        web: this.seleccion.properties.web,
-        clase: this.clase
-      }
-    }
-    this.router.navigate(['/detalle-resultados'], navExtras);
-
-    /*
-    //PRUEBA DE MODAL BÁSICA DE PABLO
-    const modal = await this.mdlCtrl.create({
-      component: DetalleResultadosPage,      
-    }); 
-
-    await modal.present();
-    const {data} = await modal.onWillDismiss()
-    console.log (data); 
-    */
-
-    /*
-    //CODIGO ORIGINAL DE ROCIO
-    const modal = await this.mdlCtrl.create({
+  async abrirModal(item:any){
+    const modal = await this.modalController.create({
       component: DetalleResultadosPage,
       componentProps: {
-        'municipio': [this.seleccion.properties.municipality],
-        'territorio': [this.seleccion.properties.territory],
-        'nombre': [this.seleccion.properties.documentname],
-        'descripcion': [this.seleccion.properties.turismdescription],
-        'web': [this.seleccion.properties.web],
-        'clase': [this.clase],
-      },
-      cssClass: 'my-custom-class',
+        'municipio': item.properties.municipality,
+        'territorio': item.properties.territory,
+        'nombre': item.properties.documentname,
+        'descripcion': item.properties.turismdescription,
+        'web': item.properties.web,
+        'clase': this.clase,
+      }
     });
 
     await modal.present();
-    */
+    
   }
   
 }

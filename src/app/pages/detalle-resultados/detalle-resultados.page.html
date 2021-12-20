@@ -1,12 +1,18 @@
 <ion-header class="ion-no-border" [translucent]="true">
   <ion-toolbar>
-    <ion-title>Berton :: Detalle</ion-title>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
+    <ion-title>Berton</ion-title>
+    <ion-buttons slot="end">
+      <ion-icon (click)="dismiss()" name="close-outline"></ion-icon>
     </ion-buttons> 
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="container" [fullscreen]="true">
-  <app-detalle></app-detalle>  
+  <app-detalle
+    [municipio]="municipio"
+    [territorio]="territorio"
+    [nombre]="nombre"
+    [descripcion]="descripcion"
+    [web]="web"
+    [clase]="clase"></app-detalle>  
 </ion-content>

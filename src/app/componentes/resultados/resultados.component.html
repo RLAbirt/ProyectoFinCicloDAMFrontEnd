@@ -5,7 +5,7 @@
     </ion-label>
   </ion-list-header>
 
-  <ion-item *ngFor="let item of listado" (click)="abrirModal(item._id)">
+  <ion-item *ngFor="let item of listado" (click)="abrirModal(item)">
     <ion-avatar slot="start">
       <img [src]="image">
     </ion-avatar>

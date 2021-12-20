@@ -19,22 +19,11 @@ export class DetalleComponent implements OnInit {
   @Input() descripcion: string;
   @Input() web: string;
   @Input() clase: string;
-            rutaImg: any;
+           rutaImg: string;
   
   constructor(private router:Router, private activateRoute: ActivatedRoute) { }
 
   ngOnInit() {    
-    this.activateRoute.queryParams.subscribe(
-      params => {
-        this.municipio = params['municipio'];
-        this.territorio = params['territorio'];
-        this.nombre = params['nombre'];
-        this.descripcion = params['nombre'];
-        this.web = params['web'];
-        this.clase =  params['clase'];
-      });
-    console.log(this.clase);  
-    console.log(`${this.municipio} ${this.territorio}`)
     switch(this.clase.toLowerCase()) {
       case 'hoteles':
         this.rutaImg = Constants.IMG_HOTEL;
@@ -47,13 +36,4 @@ export class DetalleComponent implements OnInit {
         break;
     }
   }
-
-
-  /* PRUEBA DE MODAL BASICA DE PABLO
-  dismiss() {
-    console.log ("Cerrar Modal"); 
-    this.modalCTRL.dismiss({dismissed: true});
-  }
-  */
-
 }
