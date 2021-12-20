@@ -5,7 +5,8 @@
     </ion-label>
   </ion-list-header>
 
-  <ion-item *ngFor="let item of listado" (click)="abrirModal(item)">
+  <!-- ion-item *ngFor="let item of listado" (click)="abrirModal(item)"> -->
+  <ion-item *ngFor="let item of listado">
     <ion-avatar slot="start">
       <img [src]="image">
     </ion-avatar>
@@ -17,7 +18,16 @@
         <ion-label>{{muestraDistancia(item.geometry.coordinates[0], item.geometry.coordinates[1])|distancia}}</ion-label>
       </ion-chip></h2>
     </ion-label>
-    <ion-icon name="send-outline" color="primary"></ion-icon>
+    <ion-chip >
+      <ion-icon name="heart-outline"></ion-icon>
+      <!-- ion-icon name="heart" color ="danger"> -->
+    </ion-chip>
+    <ion-buttons>
+      <ion-button (click)="abrirModal(item)" >
+        <ion-icon name="send-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+        
   </ion-item>
 </ion-list>
 
