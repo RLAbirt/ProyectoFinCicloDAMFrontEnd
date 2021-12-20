@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultadosPage implements OnInit {
 
-  constructor() { }
+  clase: string ="";
+  distancia: number = 0;
+
+  constructor( private activatedRoute:ActivatedRoute ) { }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(
+      params => {
+        this.clase =  params['clase'];
+      });
+  }
+
+  getDistancia( event:CustomEvent ) {
+    console.log('evento',event);
+    this.distancia = event.detail.value;
+    console.log(this.distancia);
   }
 
 }

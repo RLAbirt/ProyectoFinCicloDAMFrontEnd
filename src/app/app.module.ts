@@ -1,4 +1,3 @@
-import { DistanciaPipe } from './pipes/distancia.pipe';
 import { PipesModule } from './pipes/pipes.module';
 import { ComponentesModule } from './componentes/componentes.module';
 import { NgModule } from '@angular/core';

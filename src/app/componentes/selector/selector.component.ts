@@ -1,6 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Router } from '@angular/router';
-import { DistService } from 'src/app/services/dist.service';
 
 @Component({
   selector: 'app-selector',
@@ -9,31 +7,14 @@ import { DistService } from 'src/app/services/dist.service';
 })
 export class SelectorComponent implements OnInit {
 
-  //@Output() redirect:EventEmitter<any> = new EventEmitter();
-
-  valueSelected: string = "1";
+  @Output() valueSelected:EventEmitter<any> = new EventEmitter();
  
-  constructor(private router:Router, private distService: DistService) { }
+  constructor() { }
 
   ngOnInit() {}
 
   public segmentChanged(event: Event){
-    this.valueSelected= (event as CustomEvent).detail.value;
-    this.changeComponent;
+    this.valueSelected.emit(event);
+    console.log(this.valueSelected);
   }
-
-  public getDistance(){
-    return +this.valueSelected;
-  }
-
-  /*changeComponent(url:string){
-    this.redirect.emit(this.valueSelected);//emits the data to the parent
-    this.router.navigate(['/resultados']);//redirects url to new component
-  }*/
-
-  changeComponent(url:string = '/resultados'){
-    this.distService.setData(this.valueSelected);
-    //this.router.navigate([url]);//redirects url to new component
-}
-
 }

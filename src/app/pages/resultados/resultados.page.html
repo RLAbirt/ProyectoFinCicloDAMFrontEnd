@@ -1,6 +1,6 @@
-<ion-header>
+<ion-header class="ion-no-border" [translucent]="true">
   <ion-toolbar>
-    <ion-title>Berton :: Resultados</ion-title>
+    <ion-title>{{clase|titlecase}}</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons> 
@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="container" [fullscreen]="true">
-  <app-selector></app-selector>
-  <app-resultados-list></app-resultados-list>
+  <app-selector (valueSelected)="getDistancia( $event )" *ngIf="this.clase !== 'ofertas'" ></app-selector>
+  <app-resultados-list [distSelect]="distancia"></app-resultados-list>
 
 </ion-content>

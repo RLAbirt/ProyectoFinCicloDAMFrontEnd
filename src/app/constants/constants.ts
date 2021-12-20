@@ -14,3 +14,5 @@ export const AVA_HOTEL = "../../assets/avatar/hotel_avatar.png";
 export const AVA_RESTAURANT = "../../assets/avatar/restaurante_avatar.png";
 export const AVA_RURAL = "../../assets/avatar/casarural_avatar.png";
 export const AVA_OFERTA = "../../assets/avatar/oferta_avatar.png";
+
+export const CASA_RURAL_TYPE = "Agroturismos";

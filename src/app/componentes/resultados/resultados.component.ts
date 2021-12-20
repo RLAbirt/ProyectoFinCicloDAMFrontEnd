@@ -1,14 +1,12 @@
 import { AVA_HOTEL, AVA_OFERTA, AVA_RESTAURANT, AVA_RURAL } from './../../constants/constants';
-import { ModalController, NavController } from '@ionic/angular';
-import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
+import { NavController } from '@ionic/angular';
 import { HttpService } from 'src/app/services/http.service';
 import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GeolocationService } from 'src/app/services/geolocation.service';
-import { SelectorComponent } from '../selector/selector.component';
-import { DistService } from 'src/app/services/dist.service';
-import { NavigationExtras, Route, Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
+import  *  as Constants from "../../constants/constants";
 
 @Component({
   selector: 'app-resultados-list',
@@ -18,9 +16,8 @@ import { NavigationExtras, Route, Router } from '@angular/router';
 })
 export class ResultadosComponent implements OnInit {
 
-  //@Input() valueSelected:any;
   @Input() listado: any;
-           distSelect: number;
+  @Input() distSelect: number;
            lon: number;
            lat: number;
            tipo: string;
@@ -41,13 +38,10 @@ export class ResultadosComponent implements OnInit {
         this.clase =  params['clase'];
         this.loadPage();
       });
-    console.log(this.clase);  
+    console.log(this.clase);
     
     this.lat = this.geoService.getLatitude(); 
-    console.log(this.lat);
-
     this.lon = this.geoService.getLongitude();
-    console.log(this.lon); 
     
     this.distSelect = 20;
     //this.distSelect = this.distService.getData();
@@ -60,28 +54,28 @@ export class ResultadosComponent implements OnInit {
     if(this.clase == "hoteles"){
       this.httpService.getByGeoHoteles(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
-        console.log(resp);
+        //console.log(resp);
         this.image = AVA_HOTEL;
         this.listado = <Hoteles[]>resp;
       })
     }else if(this.clase == "alojamientos"){
-      this.httpService.getByGeoCasasRurales(this.lon,this.lat,this.distSelect, this.tipo)
+      this.httpService.getByGeoCasasRurales(this.lon,this.lat,this.distSelect, Constants.CASA_RURAL_TYPE)
       .subscribe(resp => {
-        console.log(resp);
+        //console.log(resp);
         this.image = AVA_RURAL;
         this.listado = <CasasRurales[]>resp;
       })
     }else if(this.clase == "restaurantes"){
       this.httpService.getByGeoRestaurantes(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
-        console.log(resp);
+        //console.log(resp);
         this.image = AVA_RESTAURANT;
         this.listado = <Restaurantes[]>resp;
       })
     }else if(this.clase == "ofertas"){
       this.httpService.getAllOfertas()
       .subscribe(resp => {
-        console.log(resp);
+        //console.log(resp);
         this.image = AVA_OFERTA;
         this.listado = <Ofertas[]>resp;
       })
@@ -89,7 +83,11 @@ export class ResultadosComponent implements OnInit {
   }
 
   public muestraDistancia(latDestino: number, lonDestino: number){
-    return this.geoService.calculaDistancia(this.lon, this.lat, lonDestino, latDestino);
+    return this.geoService.calculaDistancia(this.lat, this.lon, lonDestino, latDestino);
+  }
+
+  ngOnChanges() {
+    this.loadPage();
   }
 
   public abrirModal(id: any){

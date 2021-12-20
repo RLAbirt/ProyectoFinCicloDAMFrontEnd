@@ -10,11 +10,11 @@
       <img [src]="image">
     </ion-avatar>
     <ion-label>
-      <h1>{{item.properties.documentname}}</h1>
+      <h1>{{item.properties.documentname|titlecase}}</h1>
       <h2>Localidad: {{item.properties.municipality}}</h2>
       <h2><ion-chip color="primary">
         <ion-icon name="navigate" color="dark"></ion-icon>
-        <ion-label>{{muestraDistancia(this.item.geometry.coordinates[0], this.item.geometry.coordinates[1])}}</ion-label>
+        <ion-label>{{muestraDistancia(item.geometry.coordinates[0], item.geometry.coordinates[1])|distancia}}</ion-label>
       </ion-chip></h2>
     </ion-label>
     <ion-icon name="send-outline" color="primary"></ion-icon>

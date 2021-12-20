@@ -59,6 +59,8 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
    * @returns number
    */
    muestraDistancia() : number {
+     console.log(this.longitud, this.latitud, 
+      this.establecimiento.geometry.coordinates[0], this.establecimiento.geometry.coordinates[1]);
     return this.geoService.calculaDistancia(this.longitud, this.latitud, 
       this.establecimiento.geometry.coordinates[0], this.establecimiento.geometry.coordinates[1]);
   }
