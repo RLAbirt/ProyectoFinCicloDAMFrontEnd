@@ -1,8 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import * as Constants from '../../constants/constants';
-import { ModalController } from '@ionic/angular'; 
-import { NavigationExtras, Route, Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-detalle',
@@ -21,7 +18,7 @@ export class DetalleComponent implements OnInit {
   @Input() clase: string;
            rutaImg: string;
   
-  constructor(private router:Router, private activateRoute: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit() {    
     switch(this.clase.toLowerCase()) {

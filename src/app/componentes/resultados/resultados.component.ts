@@ -1,11 +1,9 @@
-import { AVA_HOTEL, AVA_OFERTA, AVA_RESTAURANT, AVA_RURAL } from './../../constants/constants';
 import { NavController, ModalController } from '@ionic/angular';
 import { HttpService } from 'src/app/services/http.service';
 import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../../interfaces/bertoninterfaces';
-import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GeolocationService } from 'src/app/services/geolocation.service';
-import { NavigationExtras, Router } from '@angular/router';
 import  *  as Constants from "../../constants/constants";
 import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
 
@@ -28,7 +26,7 @@ export class ResultadosComponent implements OnInit {
 
 
   constructor(
-                private router:Router, public navCtrl: NavController, 
+                public navCtrl: NavController, 
                 private httpService: HttpService, private activateRoute: ActivatedRoute,
                 private geoService:GeolocationService, private modalController:ModalController) { }
 
@@ -45,7 +43,7 @@ export class ResultadosComponent implements OnInit {
     this.lon = this.geoService.getLongitude();
     
     this.distSelect = 20;
-    //this.distSelect = this.distService.getData();
+
     console.log(this.distSelect); 
       
     this.loadPage();
@@ -56,28 +54,28 @@ export class ResultadosComponent implements OnInit {
       this.httpService.getByGeoHoteles(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
         //console.log(resp);
-        this.image = AVA_HOTEL;
+        this.image = Constants.AVA_HOTEL;
         this.listado = <Hoteles[]>resp;
       })
     }else if(this.clase == "alojamientos"){
       this.httpService.getByGeoCasasRurales(this.lon,this.lat,this.distSelect, Constants.CASA_RURAL_TYPE)
       .subscribe(resp => {
         //console.log(resp);
-        this.image = AVA_RURAL;
+        this.image = Constants.AVA_RURAL;
         this.listado = <CasasRurales[]>resp;
       })
     }else if(this.clase == "restaurantes"){
       this.httpService.getByGeoRestaurantes(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
         //console.log(resp);
-        this.image = AVA_RESTAURANT;
+        this.image = Constants.AVA_RESTAURANT;
         this.listado = <Restaurantes[]>resp;
       })
     }else if(this.clase == "ofertas"){
       this.httpService.getAllOfertas()
       .subscribe(resp => {
         //console.log(resp);
-        this.image = AVA_OFERTA;
+        this.image = Constants.AVA_OFERTA;
         this.listado = <Ofertas[]>resp;
       })
     }
