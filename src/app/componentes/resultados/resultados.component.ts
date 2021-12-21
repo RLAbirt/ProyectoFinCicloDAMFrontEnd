@@ -15,9 +15,10 @@ import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-
 })
 export class ResultadosComponent implements OnInit {
 
-  @Input() listado: any;
+  
   @Input() distSelect: number;
   @Input() clase:string;
+           listado: any[] = [];
            lon: number;
            lat: number;
            tipo: string;
@@ -43,6 +44,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   private loadPage(){
+    this.listado = [];
     if(this.clase == "hoteles"){
       this.httpService.getByGeoHoteles(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
