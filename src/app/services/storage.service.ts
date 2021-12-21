@@ -135,9 +135,45 @@ export class StorageService {
     return this.ofertasFavoritos; 
   }
 
+  // añadir un establecimiento (hotel, restaurante, alojamiento) u oferta a favoritos
+  public aniadirEstablecimientoFavorito(listaEstablecimientosFavoritos: any, establecimientoFavorito: any, key:string): any {
+    let esEncontradoEstablecimiento: boolean = false;
+    // si no es favorito lo añado
+    // el array esta vacio, lo inserto
+    console.log("dentro de añadir favorito");
+    console.log(listaEstablecimientosFavoritos);
+    console.log(this.restaurantesFavoritos);
+
+    if (listaEstablecimientosFavoritos.length == 0) {
+      console.log("lista vacia. añado el elemento");
+      listaEstablecimientosFavoritos = [...listaEstablecimientosFavoritos, establecimientoFavorito];
+      this.setObject(key, listaEstablecimientosFavoritos);   
+    }
+    else {
+      console.log("la lista no esta vacia, compruebo");
+      // recorro el array
+      listaEstablecimientosFavoritos.forEach(establecimiento => {
+        if (establecimientoFavorito.properties.friendlyurl == establecimiento.properties.friendlyurl) {
+          esEncontradoEstablecimiento = true;
+          console.log("esta el establecimiento como favorito");
+        }
+      });
+      // lo añado si no esta en el array
+      if (!esEncontradoEstablecimiento) {
+        console.log("no esta el establecimiento como favorito, lo añado");
+        listaEstablecimientosFavoritos = [...listaEstablecimientosFavoritos, establecimientoFavorito];
+        this.setObject(key, listaEstablecimientosFavoritos); 
+      }
+    }
+    return listaEstablecimientosFavoritos;
+  }
+
+
   // marca el restaurante como favorito y lo añade al storage
-  public aniadirRestauranteFavorito(restauranteFavorito:Restaurantes)
-  {
+  public aniadirRestauranteFavorito (restauranteFavorito:Restaurantes) {
+    this.restaurantesFavoritos = 
+    this.aniadirEstablecimientoFavorito(this.restaurantesFavoritos, restauranteFavorito, this.keyRestaurantes);
+    /*
     let esEncontradoRestaurante: boolean = false;
     // si no es favorito lo añado
     // el array esta vacio, lo inserto
@@ -148,7 +184,6 @@ export class StorageService {
     else {
       // recorro el array
       this.restaurantesFavoritos.forEach(restaurante => {
-        console.log("dentro del foreach");
         if (restauranteFavorito.properties.friendlyurl == restaurante.properties.friendlyurl) {
           esEncontradoRestaurante = true;
         }
@@ -158,9 +193,7 @@ export class StorageService {
         this.restaurantesFavoritos = [...this.restaurantesFavoritos, restauranteFavorito];
         this.setObject(this.keyRestaurantes, this.restaurantesFavoritos);   
       }
-    }
-
-    
+    } */
   }
 
   public quitarRestauranteFavorito(indice: number)
