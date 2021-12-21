@@ -116,22 +116,17 @@ export class ResultadosComponent implements OnInit {
 
   anadirFavoritos(item:any){
     // this.clase: restaurantes, hoteles, alojamientos, ofertas
-    console.log("dentro de añadir favoritos");
     switch(this.clase) {
       case "restaurantes":
-        console.log("añado al storage de restaurantes el item ");
         this.storageService.aniadirRestauranteFavorito(item);
         break;
       case "hoteles":
-        console.log("añado al storage de hoteles el hotel");
         this.storageService.aniadirHotelFavorito(item);
         break;
       case "alojamientos":
-        console.log("añado al storage de alojamientos el item");
         this.storageService.aniadirCasaRuralFavorito(item); 
         break;
       case "ofertas":
-        console.log("añado al storage de ofertas la oferta");
         this.storageService.aniadirOfertaFavorito(item);
         break;
       default:
