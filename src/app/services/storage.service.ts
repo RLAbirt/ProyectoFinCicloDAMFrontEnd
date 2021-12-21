@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Storage } from '@Capacitor/storage'; 
 
@@ -110,33 +111,56 @@ export class StorageService {
     this.obtenerOfertasFavoritos(); 
   }
 
+  // devuelve el array de restaurantes favoritos
   public getRestaurantesFavoritos():Restaurantes[]
   {
     return this.restaurantesFavoritos; 
   }
 
+  // devuelve el array de hoteles favoritos
   public getHotelesFavoritos():Hoteles[]
   {
     return this.hotelesFavoritos; 
   }
 
+  // devuelve el array de casas rurales favoritas
   public getCasasRuralesFavoritos():CasasRurales[]
   {
     return this.casasRuralesFavoritos; 
   }
 
+  // devuelve el array de ofertas favoritas
   public getOfertasFavoritos():Ofertas[]
   {
     return this.ofertasFavoritos; 
   }
 
+  // marca el restaurante como favorito y lo añade al storage
   public aniadirRestauranteFavorito(restauranteFavorito:Restaurantes)
   {
+    let esEncontradoRestaurante: boolean = false;
     // si no es favorito lo añado
-    let restauranteEncontrado = this.restaurantesFavoritos.find(x => restauranteFavorito);
-    console.log(restauranteEncontrado);
-    this.restaurantesFavoritos = [...this.restaurantesFavoritos, restauranteFavorito];
-    this.setObject(this.keyRestaurantes, this.restaurantesFavoritos); 
+    // el array esta vacio, lo inserto
+    if (this.restaurantesFavoritos.length == 0) {
+      this.restaurantesFavoritos = [...this.restaurantesFavoritos, restauranteFavorito];
+      this.setObject(this.keyRestaurantes, this.restaurantesFavoritos);   
+    }
+    else {
+      // recorro el array
+      this.restaurantesFavoritos.forEach(restaurante => {
+        console.log("dentro del foreach");
+        if (restauranteFavorito.properties.friendlyurl == restaurante.properties.friendlyurl) {
+          esEncontradoRestaurante = true;
+        }
+      });
+      // lo añado si no esta en el array
+      if (!esEncontradoRestaurante) {
+        this.restaurantesFavoritos = [...this.restaurantesFavoritos, restauranteFavorito];
+        this.setObject(this.keyRestaurantes, this.restaurantesFavoritos);   
+      }
+    }
+
+    
   }
 
   public quitarRestauranteFavorito(indice: number)

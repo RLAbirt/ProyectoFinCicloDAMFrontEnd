@@ -45,9 +45,17 @@ export class ResultadosComponent implements OnInit {
     
     this.distSelect = 20;
 
-    console.log(this.distSelect); 
-      
-    this.loadPage();
+    this.geoService.actualizarPosicion()
+      .then(() => {
+        this.lat = this.geoService.getLatitude(); 
+        this.lon = this.geoService.getLongitude();
+        
+        this.distSelect = 20;
+
+        console.log(this.distSelect); 
+          
+        this.loadPage();
+      })
   }
 
   private loadPage(){
