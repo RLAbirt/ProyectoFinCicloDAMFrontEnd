@@ -18,7 +18,7 @@ export class CategoriaInicioHotelesComponent implements OnInit {
     speed: 400,
     slidesPerView: 2,
   };
-  hoteles: Hoteles[]= [];
+  hoteles: Hoteles[] = [];
   establecimiento:string = "";
   enlace:string="";
   rutaImg:string="";
