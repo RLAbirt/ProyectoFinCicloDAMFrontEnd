@@ -171,8 +171,8 @@ export class StorageService {
 
   // marca el restaurante como favorito y lo añade al storage
   public aniadirRestauranteFavorito (restauranteFavorito:Restaurantes) {
-    this.restaurantesFavoritos = 
-    this.aniadirEstablecimientoFavorito(this.restaurantesFavoritos, restauranteFavorito, this.keyRestaurantes);
+    this.restaurantesFavoritos = this.aniadirEstablecimientoFavorito(this.restaurantesFavoritos, 
+                                                                      restauranteFavorito, this.keyRestaurantes);
     /*
     let esEncontradoRestaurante: boolean = false;
     // si no es favorito lo añado
@@ -206,8 +206,8 @@ export class StorageService {
 
   public aniadirHotelFavorito(hotelFavorito:Hoteles)
   {
-    this.hotelesFavoritos = [...this.hotelesFavoritos, hotelFavorito];
-    this.setObject(this.keyHoteles, this.hotelesFavoritos); 
+    this.hotelesFavoritos = this.aniadirEstablecimientoFavorito(this.hotelesFavoritos, 
+      hotelFavorito, this.keyHoteles);
   }
 
   public quitarHotelFavorito(indice: number)
@@ -220,8 +220,8 @@ export class StorageService {
 
   public aniadirCasaRuralFavorito(casaRuralFavorito:CasasRurales)
   {
-    this.casasRuralesFavoritos = [...this.casasRuralesFavoritos, casaRuralFavorito];
-    this.setObject(this.keyCasasRurales, this.casasRuralesFavoritos); 
+    this.casasRuralesFavoritos = this.aniadirEstablecimientoFavorito(this.casasRuralesFavoritos, 
+      casaRuralFavorito, this.keyCasasRurales);
   }
 
   public quitarCasaRuralFavorito(indice: number)
@@ -234,8 +234,8 @@ export class StorageService {
 
   public aniadirOfertaFavorito(ofertaFavorito:Ofertas)
   {
-    this.ofertasFavoritos = [...this.ofertasFavoritos, ofertaFavorito];
-    this.setObject(this.keyOfertas, this.ofertasFavoritos); 
+    this.ofertasFavoritos = this.aniadirEstablecimientoFavorito(this.ofertasFavoritos, 
+      ofertaFavorito, this.keyOfertas);
   }
 
   public quitarOfertaFavorito(indice: number)
