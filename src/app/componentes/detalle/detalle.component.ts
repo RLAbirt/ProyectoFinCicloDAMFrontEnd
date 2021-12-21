@@ -20,7 +20,7 @@ export class DetalleComponent implements OnInit {
   
   constructor() { }
 
-  ngOnInit() {    
+  ngOnInit() {
     switch(this.clase.toLowerCase()) {
       case 'hoteles':
         this.rutaImg = Constants.IMG_HOTEL;

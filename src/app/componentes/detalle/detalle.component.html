@@ -1,21 +1,15 @@
-<!-- PUREBA DE MODAL BASICA DE PABLO
-<ion-content>
-  <ion-button click="dismiss()">Cerrar</ion-button>
-</ion-content>
--->
-
-
 <ion-card>
   <img [src]="rutaImg" />
   <ion-card-header>
+    <ion-card-title>{{clase === 'ofertas' ? nombre : nombre|titlecase}}</ion-card-title>
     <ion-card-subtitle>
-        <ion-item>Municipio : {{municipio}} - Provincia: {{territorio}}</ion-item>
+        <ion-icon name="location-outline"></ion-icon>{{municipio}}, {{territorio}}
     </ion-card-subtitle>
-    <ion-card-title>Nombre : {{nombre}}</ion-card-title>
+    
   </ion-card-header>
   <ion-card-content>
     <p>{{descripcion}}</p>
-    <h5>Web : {{web}}</h5>
+    <h5><a href="#" onclick="window.open(web)">Visita la web</a></h5>
   </ion-card-content>
   
 </ion-card>

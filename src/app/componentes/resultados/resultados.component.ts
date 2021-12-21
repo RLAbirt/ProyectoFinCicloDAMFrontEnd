@@ -35,7 +35,6 @@ export class ResultadosComponent implements OnInit {
     this.activateRoute.queryParams.subscribe(
       params => {
         this.clase =  params['clase'];
-        this.loadPage();
       });
     console.log(this.clase);
     
@@ -81,7 +80,7 @@ export class ResultadosComponent implements OnInit {
     }
   }
 
-  public muestraDistancia(latDestino: number, lonDestino: number){
+  muestraDistancia(latDestino: number, lonDestino: number){
     return this.geoService.calculaDistancia(this.lat, this.lon, lonDestino, latDestino);
   }
 
@@ -90,20 +89,34 @@ export class ResultadosComponent implements OnInit {
   }
 
   async abrirModal(item:any){
-    const modal = await this.modalController.create({
-      component: DetalleResultadosPage,
-      componentProps: {
-        'municipio': item.properties.municipality,
-        'territorio': item.properties.territory,
-        'nombre': item.properties.documentname,
-        'descripcion': item.properties.turismdescription,
-        'web': item.properties.web,
-        'clase': this.clase,
-      }
-    });
+    if(this.clase === 'ofertas') {
+      const modal = await this.modalController.create({
+        component: DetalleResultadosPage,
+        componentProps: {
+          'municipio': item.properties.municipality,
+          'territorio': item.properties.territory,
+          'nombre': item.properties.documentname,
+          'descripcion': item.properties.documentdescription,
+          'web': item.properties.friendlyurl,
+          'clase': this.clase,
+        }
+      });
+      await modal.present();
+    } else {
+      const modal = await this.modalController.create({
+        component: DetalleResultadosPage,
+        componentProps: {
+          'municipio': item.properties.municipality,
+          'territorio': item.properties.territory,
+          'nombre': item.properties.documentname,
+          'descripcion': item.properties.turismdescription,
+          'web': item.properties.web,
+          'clase': this.clase,
+        }
+      });
+      await modal.present();
+    }
 
-    await modal.present();
-    
   }
   
 }
