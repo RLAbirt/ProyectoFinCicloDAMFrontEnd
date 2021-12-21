@@ -17,10 +17,10 @@ export class ResultadosComponent implements OnInit {
 
   @Input() listado: any;
   @Input() distSelect: number;
+  @Input() clase:string;
            lon: number;
            lat: number;
            tipo: string;
-           clase: string;
            seleccion: any;
            image: any;
 
@@ -31,12 +31,6 @@ export class ResultadosComponent implements OnInit {
                 private geoService:GeolocationService, private modalController:ModalController) { }
 
   ngOnInit() {
-    
-    this.activateRoute.queryParams.subscribe(
-      params => {
-        this.clase =  params['clase'];
-      });
-    console.log(this.clase);
     
     this.lat = this.geoService.getLatitude(); 
     this.lon = this.geoService.getLongitude();
@@ -85,6 +79,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   ngOnChanges() {
+    console.log(this.tipo);
     this.loadPage();
   }
 

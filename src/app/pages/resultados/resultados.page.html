@@ -9,6 +9,6 @@
 
 <ion-content class="container" [fullscreen]="true">
   <app-selector (valueSelected)="getDistancia( $event )" *ngIf="this.clase !== 'ofertas'" ></app-selector>
-  <app-resultados-list [distSelect]="distancia"></app-resultados-list>
+  <app-resultados-list [distSelect]="distancia" [clase]="clase"></app-resultados-list>
 
 </ion-content>

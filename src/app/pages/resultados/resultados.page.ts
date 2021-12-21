@@ -17,6 +17,7 @@ export class ResultadosPage implements OnInit {
     this.activatedRoute.queryParams.subscribe(
       params => {
         this.clase =  params['clase'];
+        console.log(this.clase);
       });
   }
 
