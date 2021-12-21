@@ -19,7 +19,12 @@ export class HomePage implements OnInit {
   casasRurales: CasasRurales[] = [];
   ofertas: Ofertas[] = [];
 
-  constructor(private httpService:HttpService, private geoService:GeolocationService, private storageService:StorageService) {}
+  constructor(private httpService:HttpService, private geoService:GeolocationService, 
+         private storageService:StorageService) {
+           this.obtenerFavoritos();
+          
+          
+         }
 
   ngOnInit(): void {
     this.getPosicion();
@@ -29,7 +34,15 @@ export class HomePage implements OnInit {
     this.geoService.actualizarPosicion();
   }
 
-  gestionarAlmacenamiento() {
-    this.storageService.probarAlmacenamiento(); 
+  // inicializamos el almacenamiento local
+  // cargamos en los arrays de favoritos lo que hay en el storage
+  obtenerFavoritos() {
+    this.storageService.obtenerFavoritos(); 
+    console.log("cargamos los 4 arrays posibles de favoritos");
+    console.log(this.storageService.getRestaurantesFavoritos());
+    console.log(this.storageService.getHotelesFavoritos());
+    console.log(this.storageService.getCasasRuralesFavoritos());
+    console.log(this.storageService.getOfertasFavoritos());
+
   }
 }

@@ -6,6 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import  *  as Constants from "../../constants/constants";
 import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-resultados-list',
@@ -26,8 +27,8 @@ export class ResultadosComponent implements OnInit {
 
 
   constructor(
-                public navCtrl: NavController, 
-                private httpService: HttpService, private activateRoute: ActivatedRoute,
+                public navCtrl: NavController, private activateRoute: ActivatedRoute,
+                private httpService: HttpService, private storageService: StorageService, 
                 private geoService:GeolocationService, private modalController:ModalController) { }
 
   ngOnInit() {
@@ -103,7 +104,31 @@ export class ResultadosComponent implements OnInit {
     });
 
     await modal.present();
-    
   }
-  
+
+  anadirFavoritos(item:any){
+    // this.clase: restaurantes, hoteles, alojamientos, ofertas
+    console.log("dentro de añadir favoritos");
+    switch(this.clase) {
+      case "restaurantes":
+        console.log("añado al storage de restaurantes el item ");
+        this.storageService.aniadirRestauranteFavorito(item);
+        break;
+      case "hoteles":
+        console.log("añado al storage de hoteles el hotel");
+        this.storageService.aniadirHotelFavorito(item);
+        break;
+      case "alojamientos":
+        console.log("añado al storage de alojamientos el item");
+        this.storageService.aniadirCasaRuralFavorito(item); 
+        break;
+      case "ofertas":
+        console.log("añado al storage de ofertas la oferta");
+        this.storageService.aniadirOfertaFavorito(item);
+        break;
+      default:
+        console.log("Error desconocido en Berton");
+    }
+  }
+
 }
