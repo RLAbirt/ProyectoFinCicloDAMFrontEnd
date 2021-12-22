@@ -19,9 +19,13 @@
       </ion-chip></h2>
     </ion-label>
     <ion-buttons>
-      <!-- añadir/quitar a/de favoritos-->
+      <!-- añadir a favoritos-->
       <ion-button *ngIf="(!esFavorito(item))" (click)="anadirFavoritos(item)">
         <ion-icon name="heart-outline"></ion-icon>
+      </ion-button>
+      <!-- quitar de favoritos-->
+      <ion-button *ngIf="(esFavorito(item))" (click)="quitarFavoritos(item)">
+        <ion-icon color=primary name="heart"></ion-icon>
       </ion-button>
       <!-- abrimos la modal de detalle-->
       <ion-button (click)="abrirModal(item)" >
