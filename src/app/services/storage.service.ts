@@ -168,32 +168,10 @@ export class StorageService {
     return listaEstablecimientosFavoritos;
   }
 
-
   // marca el restaurante como favorito y lo añade al storage
   public aniadirRestauranteFavorito (restauranteFavorito:Restaurantes) {
     this.restaurantesFavoritos = this.aniadirEstablecimientoFavorito(this.restaurantesFavoritos, 
                                                                       restauranteFavorito, this.keyRestaurantes);
-    /*
-    let esEncontradoRestaurante: boolean = false;
-    // si no es favorito lo añado
-    // el array esta vacio, lo inserto
-    if (this.restaurantesFavoritos.length == 0) {
-      this.restaurantesFavoritos = [...this.restaurantesFavoritos, restauranteFavorito];
-      this.setObject(this.keyRestaurantes, this.restaurantesFavoritos);   
-    }
-    else {
-      // recorro el array
-      this.restaurantesFavoritos.forEach(restaurante => {
-        if (restauranteFavorito.properties.friendlyurl == restaurante.properties.friendlyurl) {
-          esEncontradoRestaurante = true;
-        }
-      });
-      // lo añado si no esta en el array
-      if (!esEncontradoRestaurante) {
-        this.restaurantesFavoritos = [...this.restaurantesFavoritos, restauranteFavorito];
-        this.setObject(this.keyRestaurantes, this.restaurantesFavoritos);   
-      }
-    } */
   }
 
   public quitarRestauranteFavorito(indice: number)
