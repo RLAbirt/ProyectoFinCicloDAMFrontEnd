@@ -46,6 +46,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   private loadPage(){
+    this.listado = [];
     if(this.clase == "hoteles"){
       this.httpService.getByGeoHoteles(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
