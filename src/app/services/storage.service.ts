@@ -156,7 +156,8 @@ export class StorageService {
 
   // añadir un establecimiento (hotel, restaurante, alojamiento) u oferta a favoritos
   // devuelve el array del favorito que se trata
-  public aniadirEstablecimientoFavorito(listaEstablecimientosFavoritos: any, establecimientoFavorito: any, key:string): any {
+  public aniadirEstablecimientoFavorito(listaEstablecimientosFavoritos: any, 
+                                        establecimientoFavorito: any, key:string): any {
     // si no es favorito lo añado
     // el array esta vacio, lo inserto
     if (!this.esFavoritoEstablecimiento(listaEstablecimientosFavoritos, establecimientoFavorito, key)) {
@@ -170,18 +171,33 @@ export class StorageService {
     return listaEstablecimientosFavoritos;
   }
 
+  // quitar un establecimiento (hotel, restaurante, alojamiento) u oferta de favoritos
+  public quitarEstablecimientoFavorito(listaEstablecimientosFavoritos: any, 
+                                      establecimientoFavorito: any, key:string): any {
+    //compruebo que este en favoritos
+    if (this.esFavoritoEstablecimiento(listaEstablecimientosFavoritos, establecimientoFavorito, key)) {
+      // lo quito de favoritos
+      let indice = listaEstablecimientosFavoritos.indexOf(establecimientoFavorito);
+      listaEstablecimientosFavoritos = [...listaEstablecimientosFavoritos.slice(0,indice), 
+                                        ...listaEstablecimientosFavoritos.slice(indice+1)];
+      this.setObject(key, listaEstablecimientosFavoritos);   
+      
+      // aviso (toast) de que se ha añadido a favoritos
+      this.presentarToast("Establecimiento eliminado de favoritos");
+    }
+    return listaEstablecimientosFavoritos;
+  }
+
   // marca el restaurante como favorito y lo añade al storage
   public aniadirRestauranteFavorito (restauranteFavorito:Restaurantes) {
     this.restaurantesFavoritos = this.aniadirEstablecimientoFavorito(this.restaurantesFavoritos, 
                                                                       restauranteFavorito, this.keyRestaurantes);
   }
 
-  public quitarRestauranteFavorito(indice: number)
+  public quitarRestauranteFavorito(restauranteFavorito:Restaurantes)
   {
-    let restaurantesInicio = this.restaurantesFavoritos.slice(0, indice); // Copia primera parte del array
-    let restaurantesFinal= this.restaurantesFavoritos.slice(indice + 1); // Copia la parte final
-    this.restaurantesFavoritos = [...restaurantesInicio, ...restaurantesFinal]; // Añade todos los elementos copiados
-    this.setObject(this.keyRestaurantes, this.restaurantesFavoritos); 
+    this.restaurantesFavoritos = this.quitarEstablecimientoFavorito(this.restaurantesFavoritos, 
+      restauranteFavorito, this.keyRestaurantes);
   }
 
   public aniadirHotelFavorito(hotelFavorito:Hoteles)
@@ -190,40 +206,30 @@ export class StorageService {
       hotelFavorito, this.keyHoteles);
   }
 
-  public quitarHotelFavorito(indice: number)
+  public quitarHotelFavorito(hotelFavorito: Hoteles)
   {
-    let hotelesInicio = this.hotelesFavoritos.slice(0, indice); // Copia primera parte del array
-    let hotelesFinal= this.hotelesFavoritos.slice(indice + 1); // Copia la parte final
-    this.hotelesFavoritos = [...hotelesInicio, ...hotelesFinal]; // Añade todos los elementos copiados
-    this.setObject(this.keyHoteles, this.hotelesFavoritos); 
+    this.hotelesFavoritos = this.quitarEstablecimientoFavorito(this.hotelesFavoritos, 
+      hotelFavorito, this.keyHoteles);
   }
 
-  public aniadirCasaRuralFavorito(casaRuralFavorito:CasasRurales)
-  {
+  public aniadirCasaRuralFavorito(casaRuralFavorito: CasasRurales) {
     this.casasRuralesFavoritos = this.aniadirEstablecimientoFavorito(this.casasRuralesFavoritos, 
       casaRuralFavorito, this.keyCasasRurales);
   }
 
-  public quitarCasaRuralFavorito(indice: number)
-  {
-    let casasRuralesInicio = this.casasRuralesFavoritos.slice(0, indice); // Copia primera parte del array
-    let casasRuralesFinal= this.casasRuralesFavoritos.slice(indice + 1); // Copia la parte final
-    this.casasRuralesFavoritos = [...casasRuralesInicio, ...casasRuralesFinal]; // Añade todos los elementos copiados
-    this.setObject(this.keyCasasRurales, this.casasRuralesFavoritos); 
+  public quitarCasaRuralFavorito(casaRuralFavorito: CasasRurales) {
+    this.casasRuralesFavoritos = this.quitarEstablecimientoFavorito(this.casasRuralesFavoritos, 
+      casaRuralFavorito, this.keyCasasRurales);
   }
 
-  public aniadirOfertaFavorito(ofertaFavorito:Ofertas)
-  {
+  public aniadirOfertaFavorito(ofertaFavorito:Ofertas) {
     this.ofertasFavoritos = this.aniadirEstablecimientoFavorito(this.ofertasFavoritos, 
       ofertaFavorito, this.keyOfertas);
   }
 
-  public quitarOfertaFavorito(indice: number)
-  {
-    let ofertasInicio = this.ofertasFavoritos.slice(0, indice); // Copia primera parte del array
-    let ofertasFinal= this.ofertasFavoritos.slice(indice + 1); // Copia la parte final
-    this.ofertasFavoritos = [...ofertasInicio, ...ofertasFinal]; // Añade todos los elementos copiados
-    this.setObject(this.keyOfertas, this.ofertasFavoritos); 
+  public quitarOfertaFavorito(ofertaFavorito: Ofertas) {
+    this.ofertasFavoritos = this.quitarEstablecimientoFavorito(this.ofertasFavoritos, 
+      ofertaFavorito, this.keyOfertas);
   }
 
   public borrarFavoritos()
