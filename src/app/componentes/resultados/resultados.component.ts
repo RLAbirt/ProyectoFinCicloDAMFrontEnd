@@ -28,7 +28,7 @@ export class ResultadosComponent implements OnInit {
 
   constructor(
                 public navCtrl: NavController, private activateRoute: ActivatedRoute,
-                private httpService: HttpService, private storageService: StorageService, 
+                private httpService: HttpService, public storageService: StorageService, 
                 private geoService:GeolocationService, private modalController:ModalController) { }
 
   ngOnInit() {
@@ -114,6 +114,37 @@ export class ResultadosComponent implements OnInit {
       await modal.present();
     }
 
+  }
+
+  private presentarToast(message: string): void {
+
+  }
+
+  public esFavorito(item:any): boolean {
+     // this.clase: restaurantes, hoteles, alojamientos, ofertas
+     let esFavoritoAux: boolean = false;
+
+     switch(this.clase) {
+      case "restaurantes":
+        esFavoritoAux = this.storageService.esFavoritoEstablecimiento(
+                              this.storageService.restaurantesFavoritos, item, this.storageService.keyRestaurantes);
+        break;
+      case "hoteles":
+        esFavoritoAux = this.storageService.esFavoritoEstablecimiento(
+          this.storageService.hotelesFavoritos, item, this.storageService.keyHoteles);
+        break;
+      case "alojamientos":
+        esFavoritoAux = this.storageService.esFavoritoEstablecimiento(
+          this.storageService.casasRuralesFavoritos, item, this.storageService.keyCasasRurales);
+        break;
+      case "ofertas":
+        esFavoritoAux = this.storageService.esFavoritoEstablecimiento(
+          this.storageService.ofertasFavoritos, item, this.storageService.keyOfertas);
+        break;
+      default:
+        console.log("Error desconocido en Berton");
+    }
+    return esFavoritoAux;   
   }
 
   anadirFavoritos(item:any){
