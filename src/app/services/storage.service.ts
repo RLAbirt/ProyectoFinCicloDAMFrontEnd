@@ -226,8 +226,15 @@ export class StorageService {
 
   public quitarHotelFavorito(hotelFavorito: Hoteles)
   {
-    let indice = this.hotelesFavoritos.indexOf(hotelFavorito);
-    this.hotelesFavoritos = this.quitarEstablecimientoFavorito(this.hotelesFavoritos, this.keyHoteles, indice);
+    let indice:number = -1;
+    let resultado = this.hotelesFavoritos.find(
+      item => item.properties.friendlyurl == hotelFavorito.properties.friendlyurl);
+      if (resultado) {
+        indice = this.hotelesFavoritos.indexOf(resultado);
+        console.log(indice);
+        this.hotelesFavoritos = 
+            this.quitarEstablecimientoFavorito(this.hotelesFavoritos, this.keyRestaurantes, indice);
+      }
   }
 
   public aniadirCasaRuralFavorito(casaRuralFavorito: CasasRurales) {
@@ -236,9 +243,15 @@ export class StorageService {
   }
 
   public quitarCasaRuralFavorito(casaRuralFavorito: CasasRurales) {
-    let indice = this.casasRuralesFavoritos.indexOf(casaRuralFavorito);
-    this.casasRuralesFavoritos = 
-          this.quitarEstablecimientoFavorito(this.casasRuralesFavoritos, this.keyCasasRurales, indice);
+    let indice:number = -1;
+    let resultado = this.casasRuralesFavoritos.find(
+      item => item.properties.friendlyurl == casaRuralFavorito.properties.friendlyurl);
+      if (resultado) {
+        indice = this.casasRuralesFavoritos.indexOf(resultado);
+        console.log(indice);
+        this.casasRuralesFavoritos = 
+            this.quitarEstablecimientoFavorito(this.casasRuralesFavoritos, this.keyCasasRurales, indice);
+      }
   }
 
   public aniadirOfertaFavorito(ofertaFavorito:Ofertas) {
@@ -247,9 +260,15 @@ export class StorageService {
   }
 
   public quitarOfertaFavorito(ofertaFavorito: Ofertas) {
-    let indice = this.ofertasFavoritos.indexOf(ofertaFavorito);
-    this.ofertasFavoritos = 
-          this.quitarEstablecimientoFavorito(this.ofertasFavoritos, this.keyOfertas, indice);
+    let indice:number = -1;
+    let resultado = this.ofertasFavoritos.find(
+      item => item.properties.friendlyurl == ofertaFavorito.properties.friendlyurl);
+      if (resultado) {
+        indice = this.ofertasFavoritos.indexOf(resultado);
+        console.log(indice);
+        this.ofertasFavoritos = 
+              this.quitarEstablecimientoFavorito(this.ofertasFavoritos, this.keyOfertas, indice);
+      }
   }
 
   public borrarFavoritos()
