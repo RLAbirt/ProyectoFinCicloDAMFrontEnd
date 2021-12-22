@@ -148,7 +148,28 @@ export class ResultadosComponent implements OnInit {
     return esFavoritoAux;   
   }
 
-  anadirFavoritos(item:any){
+
+  quitarFavoritos(item:any) {
+    // this.clase: restaurantes, hoteles, alojamientos, ofertas
+    switch(this.clase) {
+      case "restaurantes":
+        this.storageService.quitarRestauranteFavorito(item);
+        break;
+      case "hoteles":
+        this.storageService.quitarHotelFavorito(item);
+        break;
+      case "alojamientos":
+        this.storageService.quitarCasaRuralFavorito(item); 
+        break;
+      case "ofertas":
+        this.storageService.quitarOfertaFavorito(item);
+        break;
+      default:
+        console.log("Error desconocido en Berton");
+    }
+  }
+
+  anadirFavoritos(item:any) {
     // this.clase: restaurantes, hoteles, alojamientos, ofertas
     switch(this.clase) {
       case "restaurantes":
