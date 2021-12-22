@@ -117,39 +117,39 @@ export class ResultadosComponent implements OnInit {
 
   }
 
-  private presentarToast(message: string): void {
-
-  }
-
+  // devuelve -1 si no es favorito. Devuelve el indice de donde se encuentra el establecimiento
   public esFavorito(item:any): boolean {
      // this.clase: restaurantes, hoteles, alojamientos, ofertas
-     let esFavoritoAux: boolean = false;
+     let indiceAux: number = -1;
 
      switch(this.clase) {
       case "restaurantes":
-        esFavoritoAux = this.storageService.esFavoritoEstablecimiento(
+        indiceAux = this.storageService.esFavoritoEstablecimiento(
                               this.storageService.restaurantesFavoritos, item, this.storageService.keyRestaurantes);
         break;
       case "hoteles":
-        esFavoritoAux = this.storageService.esFavoritoEstablecimiento(
+        indiceAux = this.storageService.esFavoritoEstablecimiento(
           this.storageService.hotelesFavoritos, item, this.storageService.keyHoteles);
         break;
       case "alojamientos":
-        esFavoritoAux = this.storageService.esFavoritoEstablecimiento(
+        indiceAux = this.storageService.esFavoritoEstablecimiento(
           this.storageService.casasRuralesFavoritos, item, this.storageService.keyCasasRurales);
         break;
       case "ofertas":
-        esFavoritoAux = this.storageService.esFavoritoEstablecimiento(
+        indiceAux = this.storageService.esFavoritoEstablecimiento(
           this.storageService.ofertasFavoritos, item, this.storageService.keyOfertas);
         break;
       default:
         console.log("Error desconocido en Berton");
     }
-    return esFavoritoAux;   
+    return indiceAux != -1;   
   }
 
 
   quitarFavoritos(item:any) {
+    
+    let indice: number = -1;    
+    
     // this.clase: restaurantes, hoteles, alojamientos, ofertas
     switch(this.clase) {
       case "restaurantes":
