@@ -132,20 +132,27 @@ export class StorageService {
     return this.ofertasFavoritos; 
   }
 
-  //devuelve si el establecimiento esta en favoritos
-  public esFavoritoEstablecimiento(listaEstablecimientosFavoritos: any, establecimientoFavorito: any, key:string):boolean {
-    let esEncontradoEstablecimiento: boolean = false;
+  //devuelve -1 si no es favorito. devuelve la posicion en caso de ser favorito
+  public esFavoritoEstablecimiento(listaEstablecimientosFavoritos: any, establecimientoFavorito: any, key:string):number {
+    let indice: number = -1;
+    let esFavorito: boolean = false;
+
     if (listaEstablecimientosFavoritos.length > 0) {
        // recorro el array
        listaEstablecimientosFavoritos.forEach(establecimiento => {
+        indice = indice + 1;
         if (establecimientoFavorito.properties.friendlyurl == establecimiento.properties.friendlyurl) {
-          esEncontradoEstablecimiento = true;
+          esFavorito = true;
         }
       });
     }
-    return esEncontradoEstablecimiento;
+    if (esFavorito) {
+      return indice;
+    }
+    return -1;
   }
 
+  // aviso emergente
   async presentarToast(messageAux: string) {
     const toast = await this.toastController.create({
       message: messageAux,
@@ -160,7 +167,7 @@ export class StorageService {
                                         establecimientoFavorito: any, key:string): any {
     // si no es favorito lo añado
     // el array esta vacio, lo inserto
-    if (!this.esFavoritoEstablecimiento(listaEstablecimientosFavoritos, establecimientoFavorito, key)) {
+    if (this.esFavoritoEstablecimiento(listaEstablecimientosFavoritos, establecimientoFavorito, key) == -1) {
       listaEstablecimientosFavoritos = [...listaEstablecimientosFavoritos, establecimientoFavorito];
       this.setObject(key, listaEstablecimientosFavoritos);   
       
@@ -172,14 +179,15 @@ export class StorageService {
   }
 
   // quitar un establecimiento (hotel, restaurante, alojamiento) u oferta de favoritos
-  public quitarEstablecimientoFavorito(listaEstablecimientosFavoritos: any, 
-                                      establecimientoFavorito: any, key:string): any {
+  public quitarEstablecimientoFavorito(listaEstablecimientosFavoritos: any, key:string, indice:number): any {
     //compruebo que este en favoritos
-    if (this.esFavoritoEstablecimiento(listaEstablecimientosFavoritos, establecimientoFavorito, key)) {
+    if (indice >= 0) {
       // lo quito de favoritos
-      let indice = listaEstablecimientosFavoritos.indexOf(establecimientoFavorito);
+      console.log("el indice del array es: ")
+      console.log(indice);
       listaEstablecimientosFavoritos = [...listaEstablecimientosFavoritos.slice(0,indice), 
                                         ...listaEstablecimientosFavoritos.slice(indice+1)];
+      console.log(listaEstablecimientosFavoritos);
       this.setObject(key, listaEstablecimientosFavoritos);   
       
       // aviso (toast) de que se ha añadido a favoritos
@@ -194,10 +202,20 @@ export class StorageService {
                                                                       restauranteFavorito, this.keyRestaurantes);
   }
 
+  // quita un restaurante de la lista de favoritos
   public quitarRestauranteFavorito(restauranteFavorito:Restaurantes)
   {
-    this.restaurantesFavoritos = this.quitarEstablecimientoFavorito(this.restaurantesFavoritos, 
-      restauranteFavorito, this.keyRestaurantes);
+    // primero tengo que buscar el restaurante por una propiedad y despues buscar el que me devuelve. 
+    // Cambia el item si esta ya en el storage
+    let indice:number = -1;
+    let resultado = this.restaurantesFavoritos.find(
+        item => item.properties.friendlyurl == restauranteFavorito.properties.friendlyurl);
+    if (resultado) {
+      indice = this.restaurantesFavoritos.indexOf(resultado);
+      console.log(indice);
+      this.restaurantesFavoritos = 
+          this.quitarEstablecimientoFavorito(this.restaurantesFavoritos, this.keyRestaurantes, indice);
+    }
   }
 
   public aniadirHotelFavorito(hotelFavorito:Hoteles)
@@ -208,8 +226,8 @@ export class StorageService {
 
   public quitarHotelFavorito(hotelFavorito: Hoteles)
   {
-    this.hotelesFavoritos = this.quitarEstablecimientoFavorito(this.hotelesFavoritos, 
-      hotelFavorito, this.keyHoteles);
+    let indice = this.hotelesFavoritos.indexOf(hotelFavorito);
+    this.hotelesFavoritos = this.quitarEstablecimientoFavorito(this.hotelesFavoritos, this.keyHoteles, indice);
   }
 
   public aniadirCasaRuralFavorito(casaRuralFavorito: CasasRurales) {
@@ -218,8 +236,9 @@ export class StorageService {
   }
 
   public quitarCasaRuralFavorito(casaRuralFavorito: CasasRurales) {
-    this.casasRuralesFavoritos = this.quitarEstablecimientoFavorito(this.casasRuralesFavoritos, 
-      casaRuralFavorito, this.keyCasasRurales);
+    let indice = this.casasRuralesFavoritos.indexOf(casaRuralFavorito);
+    this.casasRuralesFavoritos = 
+          this.quitarEstablecimientoFavorito(this.casasRuralesFavoritos, this.keyCasasRurales, indice);
   }
 
   public aniadirOfertaFavorito(ofertaFavorito:Ofertas) {
@@ -228,8 +247,9 @@ export class StorageService {
   }
 
   public quitarOfertaFavorito(ofertaFavorito: Ofertas) {
-    this.ofertasFavoritos = this.quitarEstablecimientoFavorito(this.ofertasFavoritos, 
-      ofertaFavorito, this.keyOfertas);
+    let indice = this.ofertasFavoritos.indexOf(ofertaFavorito);
+    this.ofertasFavoritos = 
+          this.quitarEstablecimientoFavorito(this.ofertasFavoritos, this.keyOfertas, indice);
   }
 
   public borrarFavoritos()
