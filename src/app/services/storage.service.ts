@@ -1,6 +1,7 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Storage } from '@Capacitor/storage'; 
+import { ToastController } from '@ionic/angular';
 
 import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../interfaces/bertoninterfaces';
 
@@ -12,21 +13,17 @@ import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../interfaces/berto
 
 export class StorageService {
 
-  private keyRestaurantes:string = "restaurantesAlmacenados"; 
-  private keyHoteles:string = "hotelesAlmacenados"; 
-  private keyCasasRurales:string = "casasRuralesAlmacenados"; 
-  private keyOfertas:string = "ofertasAlmacenados"; 
+  public keyRestaurantes:string = "restaurantesAlmacenados"; 
+  public keyHoteles:string = "hotelesAlmacenados"; 
+  public keyCasasRurales:string = "casasRuralesAlmacenados"; 
+  public keyOfertas:string = "ofertasAlmacenados"; 
 
-  private restaurantesFavoritos:Restaurantes[]=[]; 
-  private hotelesFavoritos:Hoteles[]=[]; 
-  private casasRuralesFavoritos:CasasRurales[]=[]; 
-  private ofertasFavoritos:Ofertas[]=[]; 
+  public restaurantesFavoritos:Restaurantes[]=[]; 
+  public hotelesFavoritos:Hoteles[]=[]; 
+  public casasRuralesFavoritos:CasasRurales[]=[]; 
+  public ofertasFavoritos:Ofertas[]=[]; 
   
-  constructor() 
-  { 
-    
-  }
-
+  constructor(public toastController: ToastController) { }
 
   // Almacena un objeto con formato JSON en local.
   // Por cada objeto, se necesita una clave (key) y el valor del objeto (value)
@@ -135,35 +132,40 @@ export class StorageService {
     return this.ofertasFavoritos; 
   }
 
-  // añadir un establecimiento (hotel, restaurante, alojamiento) u oferta a favoritos
-  public aniadirEstablecimientoFavorito(listaEstablecimientosFavoritos: any, establecimientoFavorito: any, key:string): any {
+  //devuelve si el establecimiento esta en favoritos
+  public esFavoritoEstablecimiento(listaEstablecimientosFavoritos: any, establecimientoFavorito: any, key:string):boolean {
     let esEncontradoEstablecimiento: boolean = false;
-    // si no es favorito lo añado
-    // el array esta vacio, lo inserto
-    console.log("dentro de añadir favorito");
-    console.log(listaEstablecimientosFavoritos);
-    console.log(this.restaurantesFavoritos);
-
-    if (listaEstablecimientosFavoritos.length == 0) {
-      console.log("lista vacia. añado el elemento");
-      listaEstablecimientosFavoritos = [...listaEstablecimientosFavoritos, establecimientoFavorito];
-      this.setObject(key, listaEstablecimientosFavoritos);   
-    }
-    else {
-      console.log("la lista no esta vacia, compruebo");
-      // recorro el array
-      listaEstablecimientosFavoritos.forEach(establecimiento => {
+    if (listaEstablecimientosFavoritos.length > 0) {
+       // recorro el array
+       listaEstablecimientosFavoritos.forEach(establecimiento => {
         if (establecimientoFavorito.properties.friendlyurl == establecimiento.properties.friendlyurl) {
           esEncontradoEstablecimiento = true;
-          console.log("esta el establecimiento como favorito");
         }
       });
-      // lo añado si no esta en el array
-      if (!esEncontradoEstablecimiento) {
-        console.log("no esta el establecimiento como favorito, lo añado");
-        listaEstablecimientosFavoritos = [...listaEstablecimientosFavoritos, establecimientoFavorito];
-        this.setObject(key, listaEstablecimientosFavoritos); 
-      }
+    }
+    return esEncontradoEstablecimiento;
+  }
+
+  async presentarToast(messageAux: string) {
+    const toast = await this.toastController.create({
+      message: messageAux,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
+  // añadir un establecimiento (hotel, restaurante, alojamiento) u oferta a favoritos
+  // devuelve el array del favorito que se trata
+  public aniadirEstablecimientoFavorito(listaEstablecimientosFavoritos: any, establecimientoFavorito: any, key:string): any {
+    // si no es favorito lo añado
+    // el array esta vacio, lo inserto
+    if (!this.esFavoritoEstablecimiento(listaEstablecimientosFavoritos, establecimientoFavorito, key)) {
+      listaEstablecimientosFavoritos = [...listaEstablecimientosFavoritos, establecimientoFavorito];
+      this.setObject(key, listaEstablecimientosFavoritos);   
+      
+      // aviso (toast) de que se ha añadido a favoritos
+      this.presentarToast("Establecimiento añadido a favoritos");
+
     }
     return listaEstablecimientosFavoritos;
   }
