@@ -40,7 +40,7 @@ export class CategoriaInicioHotelesComponent implements OnInit {
 
   cargaComponente() {
 
-      this.establecimiento = "Hotel";
+      this.establecimiento = "Hoteles";
 
       this.httpService.getByGeoHoteles(this.longitud, this.latitud, 20)
         .subscribe(resp => {
@@ -57,7 +57,7 @@ export class CategoriaInicioHotelesComponent implements OnInit {
   abreResultado() {
     let navExtras:NavigationExtras = {
       queryParams: {
-        clase: this.establecimiento
+        clase: this.establecimiento.toLowerCase()
       }
     }
     this.router.navigate(['/resultados'], navExtras);

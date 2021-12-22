@@ -16,12 +16,12 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class ResultadosComponent implements OnInit {
 
-  @Input() listado: any;
+  @Input() clase:string;
   @Input() distSelect: number;
+           listado:any[] = [];
            lon: number;
            lat: number;
            tipo: string;
-           clase: string;
            seleccion: any;
            image: any;
 
@@ -32,19 +32,6 @@ export class ResultadosComponent implements OnInit {
                 private geoService:GeolocationService, private modalController:ModalController) { }
 
   ngOnInit() {
-    
-    this.activateRoute.queryParams.subscribe(
-      params => {
-        this.clase =  params['clase'];
-        this.loadPage();
-      });
-    console.log(this.clase);
-    
-    this.lat = this.geoService.getLatitude(); 
-    this.lon = this.geoService.getLongitude();
-    
-    this.distSelect = 20;
-
     this.geoService.actualizarPosicion()
       .then(() => {
         this.lat = this.geoService.getLatitude(); 
@@ -99,19 +86,34 @@ export class ResultadosComponent implements OnInit {
   }
 
   async abrirModal(item:any){
-    const modal = await this.modalController.create({
-      component: DetalleResultadosPage,
-      componentProps: {
-        'municipio': item.properties.municipality,
-        'territorio': item.properties.territory,
-        'nombre': item.properties.documentname,
-        'descripcion': item.properties.turismdescription,
-        'web': item.properties.web,
-        'clase': this.clase,
-      }
-    });
+    if(this.clase === 'ofertas') {
+      const modal = await this.modalController.create({
+        component: DetalleResultadosPage,
+        componentProps: {
+          'municipio': item.properties.municipality,
+          'territorio': item.properties.territory,
+          'nombre': item.properties.documentname,
+          'descripcion': item.properties.documentdescription,
+          'web': item.properties.friendlyurl,
+          'clase': this.clase,
+        }
+      });
+      await modal.present();
+    } else {
+      const modal = await this.modalController.create({
+        component: DetalleResultadosPage,
+        componentProps: {
+          'municipio': item.properties.municipality,
+          'territorio': item.properties.territory,
+          'nombre': item.properties.documentname,
+          'descripcion': item.properties.turismdescription,
+          'web': item.properties.web,
+          'clase': this.clase,
+        }
+      });
+      await modal.present();
+    }
 
-    await modal.present();
   }
 
   anadirFavoritos(item:any){

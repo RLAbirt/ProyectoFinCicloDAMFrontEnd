@@ -1,7 +1,9 @@
+import { ModalController } from '@ionic/angular';
 import { GeolocationService } from 'src/app/services/geolocation.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 import * as Constants from '../../constants/constants';
+import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-resultados.page';
 
 @Component({
   selector: 'app-tarjeta-categoria-inicio',
@@ -19,7 +21,8 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
   rutaImg:string="";
 
 
-  constructor( private router:Router, private geoService:GeolocationService ) { }
+  constructor( private router:Router, private geoService:GeolocationService,
+               private modalController:ModalController ) { }
 
   ngOnInit() {
     this.distancia = this.muestraDistancia();
@@ -40,16 +43,20 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
    * Abre la página detalle del establecimiento seleccionado
    * @param index 
    */
-  abreDetalle() {
-    let navExtras:NavigationExtras = {
-      queryParams: {
-        establecimiento: this.establecimiento
+  async abreModal() {
+    const modal = await this.modalController.create({
+      component: DetalleResultadosPage,
+      componentProps: {
+        'municipio': this.establecimiento.properties.municipality,
+        'territorio': this.establecimiento.properties.territory,
+        'nombre': this.establecimiento.properties.documentname,
+        'descripcion': this.establecimiento.properties.turismdescription,
+        'web': this.establecimiento.properties.web,
+        'clase': this.tipo,
       }
-    }
+    });
 
-    console.log(this.establecimiento);
-
-    this.router.navigate(['/detalle-resultados'], navExtras);
+    await modal.present();
   }
 
   /**
