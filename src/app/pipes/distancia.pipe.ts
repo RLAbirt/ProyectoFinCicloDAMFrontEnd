@@ -7,10 +7,11 @@ export class DistanciaPipe implements PipeTransform {
 
   transform(value: number): string {
 
-    if(value < 1) {
-      return `${value*100} m`;
+    if(value < 1000) {
+      return `${value} m`;
     } else {
-      return `${value} km`;
+      let rounded = Math.round(value/1000)*1000;
+      return `${rounded/1000} km`;
     }
   }
 

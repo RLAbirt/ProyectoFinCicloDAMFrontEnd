@@ -15,7 +15,7 @@
       <h2>Localidad: {{item.properties.municipality}}</h2>
       <h2><ion-chip color="primary">
         <ion-icon name="navigate" color="dark"></ion-icon>
-        <ion-label>{{muestraDistancia(item.geometry.coordinates[0], item.geometry.coordinates[1])|distancia}}</ion-label>
+        <ion-label>{{item.geometry.distance|distancia}}</ion-label>
       </ion-chip></h2>
     </ion-label>
     <ion-buttons>

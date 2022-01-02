@@ -16,8 +16,7 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
   @Input() tipo:string;
   @Input() longitud:number;
   @Input() latitud:number;
-
-  distancia:number = 0;
+  
   rutaImg:string="";
 
 
@@ -25,7 +24,6 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
                private modalController:ModalController ) { }
 
   ngOnInit() {
-    this.distancia = this.muestraDistancia();
     switch(this.tipo.toLowerCase()) {
       case 'hoteles':
         this.rutaImg = Constants.IMG_HOTEL;
@@ -65,11 +63,11 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
    * @param index 
    * @returns number
    */
-   muestraDistancia() : number {
+   /* muestraDistancia() : number {
      console.log(this.longitud, this.latitud, 
       this.establecimiento.geometry.coordinates[0], this.establecimiento.geometry.coordinates[1]);
     return this.geoService.calculaDistancia(this.longitud, this.latitud, 
       this.establecimiento.geometry.coordinates[0], this.establecimiento.geometry.coordinates[1]);
-  }
+  } */
 
 }
