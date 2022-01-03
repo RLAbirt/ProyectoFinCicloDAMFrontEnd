@@ -45,47 +45,51 @@ export class ResultadosComponent implements OnInit {
       })
   }
 
+  /**
+   * Carga la información a mostrar dependiendo
+   * del tipo de establecimiento.
+   */
   private loadPage(){
     this.listado = [];
     if(this.clase == "hoteles"){
       this.httpService.getByGeoHoteles(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
-        //console.log(resp);
         this.image = Constants.AVA_HOTEL;
         this.listado = <Hoteles[]>resp;
       })
     }else if(this.clase == "alojamientos"){
       this.httpService.getByGeoCasasRurales(this.lon,this.lat,this.distSelect, Constants.CASA_RURAL_TYPE)
       .subscribe(resp => {
-        //console.log(resp);
         this.image = Constants.AVA_RURAL;
         this.listado = <CasasRurales[]>resp;
       })
     }else if(this.clase == "restaurantes"){
       this.httpService.getByGeoRestaurantes(this.lon,this.lat,this.distSelect)
       .subscribe(resp => {
-        //console.log(resp);
         this.image = Constants.AVA_RESTAURANT;
         this.listado = <Restaurantes[]>resp;
       })
     }else if(this.clase == "ofertas"){
       this.httpService.getAllOfertas()
       .subscribe(resp => {
-        //console.log(resp);
         this.image = Constants.AVA_OFERTA;
         this.listado = <Ofertas[]>resp;
       })
     }
   }
-
-  public muestraDistancia(latDestino: number, lonDestino: number){
-    return this.geoService.calculaDistancia(this.lat, this.lon, lonDestino, latDestino);
-  }
-
+  /**
+   * Llama a cargar la página cuando se active el
+   * detector de cambios.
+   */
   ngOnChanges() {
     this.loadPage();
   }
 
+  /**
+   * Abre la modal para mostrar el detalle del establecimiento
+   * seleccionado.
+   * @param item
+   */
   async abrirModal(item:any){
     if(this.clase === 'ofertas') {
       const modal = await this.modalController.create({

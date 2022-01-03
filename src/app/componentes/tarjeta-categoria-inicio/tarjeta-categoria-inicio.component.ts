@@ -56,18 +56,4 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
 
     await modal.present();
   }
-
-  /**
-   * Llama a calcular la distancia entre la localización del usuario y el establecimiento a mostrar
-   * y la devuelve para mostrarlo en pantalla.
-   * @param index 
-   * @returns number
-   */
-   /* muestraDistancia() : number {
-     console.log(this.longitud, this.latitud, 
-      this.establecimiento.geometry.coordinates[0], this.establecimiento.geometry.coordinates[1]);
-    return this.geoService.calculaDistancia(this.longitud, this.latitud, 
-      this.establecimiento.geometry.coordinates[0], this.establecimiento.geometry.coordinates[1]);
-  } */
-
 }
