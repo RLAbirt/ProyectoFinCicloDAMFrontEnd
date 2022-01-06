@@ -2,6 +2,7 @@
 export const ICON_HOTEL = 'bed-outline';
 export const ICON_RESTAURANT = 'restaurant-outline';
 export const ICON_RURAL = 'home-outline';
+export const ICON_OFERTA = 'gift-outline';
 
 //Imágenes
 export const IMG_HOTEL = "../../assets/images/hotel.jpg";
