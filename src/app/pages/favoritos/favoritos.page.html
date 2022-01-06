@@ -9,7 +9,7 @@
 
 <ion-content>
   <!-- hoteles favoritos -->
-  <ion-item *ngFor="let item of storageService.hotelesFavoritos" (click)="abrirModalNoOfertas(item)"> 
+  <ion-item *ngFor="let item of storageService.hotelesFavoritos" (click)="abrirModalNoOfertas(item, 'hoteles')"> 
     <ion-avatar slot="start">
       <img [src]="avatarHotel">
     </ion-avatar>
@@ -21,7 +21,7 @@
   </ion-item>
 
   <!-- restaurantes favoritos -->
-  <ion-item *ngFor="let item of storageService.restaurantesFavoritos" (click)="abrirModalNoOfertas(item)"> 
+  <ion-item *ngFor="let item of storageService.restaurantesFavoritos" (click)="abrirModalNoOfertas(item, 'restaurantes')"> 
     <ion-avatar slot="start">
       <img [src]="avatarRestaurante">
     </ion-avatar>
@@ -33,7 +33,7 @@
   </ion-item>
 
   <!-- Casas Rurales favoritos -->
-  <ion-item *ngFor="let item of storageService.casasRuralesFavoritos" (click)="abrirModalNoOfertas(item)"> 
+  <ion-item *ngFor="let item of storageService.casasRuralesFavoritos" (click)="abrirModalNoOfertas(item, 'alojamientos')"> 
     <ion-avatar slot="start">
       <img [src]="avatarCasaRural">
     </ion-avatar>

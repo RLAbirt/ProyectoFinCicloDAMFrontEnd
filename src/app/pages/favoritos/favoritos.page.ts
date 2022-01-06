@@ -1,3 +1,5 @@
+import { Restaurantes } from './../../interfaces/bertoninterfaces';
+import { isNgTemplate } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
@@ -28,7 +30,8 @@ export class FavoritosPage implements OnInit {
    * seleccionado.
    * @param item
    */
-     async abrirModalNoOfertas(item:any){
+     async abrirModalNoOfertas(item:any, clase:string){
+      
       const modal = await this.modalController.create({
         component: DetalleResultadosPage,
         componentProps: {
@@ -36,7 +39,8 @@ export class FavoritosPage implements OnInit {
           'territorio': item.properties.territory,
           'nombre': item.properties.documentname,
           'descripcion': item.properties.turismdescription,
-          'web': item.properties.web
+          'web': item.properties.web,
+          'clase': clase
         }
       });
       await modal.present();
@@ -57,6 +61,7 @@ export class FavoritosPage implements OnInit {
           'nombre': item.properties.documentname,
           'descripcion': item.properties.documentdescription,
           'web': item.properties.friendlyurl,
+          'clase': "ofertas",
         }
       });
       await modal.present();
