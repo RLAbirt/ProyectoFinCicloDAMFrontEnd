@@ -8,5 +8,52 @@
 </ion-header>
 
 <ion-content>
+  <!-- hoteles favoritos -->
+  <ion-item *ngFor="let item of storageService.hotelesFavoritos" (click)="abrirModalNoOfertas(item)"> 
+    <ion-avatar slot="start">
+      <img [src]="avatarHotel">
+    </ion-avatar>
+    
+    <ion-label>
+      <h1>{{item.properties.documentname|titlecase}}</h1>
+      <h2>Localidad: {{item.properties.municipality}}</h2>
+    </ion-label>
+  </ion-item>
+
+  <!-- restaurantes favoritos -->
+  <ion-item *ngFor="let item of storageService.restaurantesFavoritos" (click)="abrirModalNoOfertas(item)"> 
+    <ion-avatar slot="start">
+      <img [src]="avatarRestaurante">
+    </ion-avatar>
+    
+    <ion-label>
+      <h1>{{item.properties.documentname|titlecase}}</h1>
+      <h2>Localidad: {{item.properties.municipality}}</h2>
+    </ion-label>
+  </ion-item>
+
+  <!-- Casas Rurales favoritos -->
+  <ion-item *ngFor="let item of storageService.casasRuralesFavoritos" (click)="abrirModalNoOfertas(item)"> 
+    <ion-avatar slot="start">
+      <img [src]="avatarCasaRural">
+    </ion-avatar>
+    
+    <ion-label>
+      <h1>{{item.properties.documentname|titlecase}}</h1>
+      <h2>Localidad: {{item.properties.municipality}}</h2>
+    </ion-label>
+  </ion-item>
+
+  <!-- Ofertas favoritos -->
+  <ion-item *ngFor="let item of storageService.ofertasFavoritos" (click)="abrirModalOfertas(item)"> 
+    <ion-avatar slot="start">
+      <img [src]="avatarOferta">
+    </ion-avatar>
+    
+    <ion-label>
+      <h1>{{item.properties.documentname|titlecase}}</h1>
+      <h2>Localidad: {{item.properties.municipality}}</h2>
+    </ion-label>
+  </ion-item>
 
 </ion-content>
