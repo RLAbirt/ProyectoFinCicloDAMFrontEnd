@@ -233,7 +233,7 @@ export class StorageService {
         indice = this.hotelesFavoritos.indexOf(resultado);
         console.log(indice);
         this.hotelesFavoritos = 
-            this.quitarEstablecimientoFavorito(this.hotelesFavoritos, this.keyRestaurantes, indice);
+            this.quitarEstablecimientoFavorito(this.hotelesFavoritos, this.keyHoteles, indice);
       }
   }
 
