@@ -1,3 +1,5 @@
+// Constantes que se van a usar en toda la app
+
 //Iconos
 export const ICON_HOTEL = 'bed-outline';
 export const ICON_RESTAURANT = 'restaurant-outline';
