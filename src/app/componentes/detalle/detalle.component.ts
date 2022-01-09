@@ -7,7 +7,7 @@ import * as Constants from '../../constants/constants';
   styleUrls: ['./detalle.component.scss'],
 })
 
-// cristina: componente para mostrar el detalle de un hotel/restaurante/alojamiento/oferta
+/** Componente que se usa en la pagina modal de ver detalle un establecimiento u oferta */
 
 export class DetalleComponent implements OnInit {
   @Input() municipio: string;
@@ -19,6 +19,10 @@ export class DetalleComponent implements OnInit {
            rutaImg: string;
   
   constructor() { }
+
+  /**
+   * Dependiendo del tipo de establecimiento asigna una imagen a la variable e mostrar en la pagina de ver detalle
+   */
 
   ngOnInit() {    
     switch(this.clase.toLowerCase()) {
