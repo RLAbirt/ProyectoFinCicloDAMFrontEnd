@@ -3,6 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
   name: 'distancia'
 })
+
+/** pipe para mostrar la distancia */
 export class DistanciaPipe implements PipeTransform {
 
   transform(value: number): string {
