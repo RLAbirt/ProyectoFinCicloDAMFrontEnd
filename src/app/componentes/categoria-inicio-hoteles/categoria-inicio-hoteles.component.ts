@@ -10,6 +10,9 @@ import  *  as Constants from "../../constants/constants";
   templateUrl: './categoria-inicio-hoteles.component.html',
   styleUrls: ['./categoria-inicio-hoteles.component.scss'],
 })
+
+/** Componente que se usa en la pagina home, muestra los hoteles */
+
 export class CategoriaInicioHotelesComponent implements OnInit {
 
   @Input() titulo: string; //Se convertirá en un objeto establecimiento para rellenar las tarjetas
@@ -28,6 +31,9 @@ export class CategoriaInicioHotelesComponent implements OnInit {
 
   constructor(private httpService: HttpService, private router:Router, private geoService:GeolocationService) { }
 
+  /**
+   * Actualiza la geolocalización y carga los hoteles
+   */
   ngOnInit() {
     this.geoService.actualizarPosicion()
      .then(() => {
@@ -38,6 +44,9 @@ export class CategoriaInicioHotelesComponent implements OnInit {
       
   }
 
+  /**
+   * función que nos devuelve los dos primeros hoteles y los carga en la pagina
+   */
   cargaComponente() {
 
       this.establecimiento = "Hoteles";
@@ -52,7 +61,8 @@ export class CategoriaInicioHotelesComponent implements OnInit {
   }
 
   /**
-   * Abre la página de resultados del tipo de establecimiento seleccionado
+   * Abre la página de resultados del tipo de establecimiento seleccionado. 
+   * La página de resultados de hoteles
    */
   abreResultado() {
     let navExtras:NavigationExtras = {
