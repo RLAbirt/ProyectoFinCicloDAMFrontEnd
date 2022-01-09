@@ -10,6 +10,11 @@ import { DetalleResultadosPage } from '../detalle-resultados/detalle-resultados.
   templateUrl: './favoritos.page.html',
   styleUrls: ['./favoritos.page.scss'],
 })
+
+/**
+ * Pagina que muestra los favoritos de toda la app 
+ * se puede ver en detalle un favorito concreto o borrarlo 
+ */
 export class FavoritosPage implements OnInit {
   public avatarHotel = Constants.AVA_HOTEL;
   public avatarRestaurante = Constants.AVA_RESTAURANT;
