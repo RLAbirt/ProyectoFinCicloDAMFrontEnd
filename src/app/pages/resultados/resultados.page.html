@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="container" [fullscreen]="true">
-  <app-selector slot="fixed" (valueSelected)="getDistancia( $event )" *ngIf="this.clase !== 'ofertas'" ></app-selector>
+  <app-selector class="selector-center" slot="fixed" (valueSelected)="getDistancia( $event )" *ngIf="this.clase !== 'ofertas'" ></app-selector>
   <app-resultados-list [clase]="clase" [distSelect]="distancia"></app-resultados-list>
 
 </ion-content>

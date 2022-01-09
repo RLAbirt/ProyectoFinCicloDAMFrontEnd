@@ -23,13 +23,13 @@
           </ion-chip>
         </ion-col>
         <ion-col size="6">
-          <ion-chip *ngIf="tipo !== 'restaurantes'">
+          <ion-chip *ngIf="tipo.toLowerCase() !== 'restaurantes'">
             <ion-icon name="star-outline" color="dark"></ion-icon>
             <ion-label>{{establecimiento.properties.category}}</ion-label>
           </ion-chip>
-          <ion-chip *ngIf="tipo === 'restaurantes'">
+          <ion-chip *ngIf="tipo.toLowerCase() === 'restaurantes'">
             <ion-icon name="people-outline" color="dark"></ion-icon>
-            <ion-label>{{establecimiento.properties.capacity}}</ion-label>
+            <ion-label>{{ establecimiento.properties.capacity ? establecimiento.properties.capacity : "n/d"}}</ion-label>
           </ion-chip>
         </ion-col>
       </ion-row>

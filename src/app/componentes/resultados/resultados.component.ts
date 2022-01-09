@@ -38,8 +38,6 @@ export class ResultadosComponent implements OnInit {
         this.lon = this.geoService.getLongitude();
         
         this.distSelect = 20;
-
-        console.log(this.distSelect); 
           
         this.loadPage();
       })
@@ -82,7 +80,10 @@ export class ResultadosComponent implements OnInit {
    * detector de cambios.
    */
   ngOnChanges() {
-    this.loadPage();
+    if( this.lon !== undefined && this.lat !== undefined ) {
+      this.loadPage();
+    }
+    
   }
 
   /**
