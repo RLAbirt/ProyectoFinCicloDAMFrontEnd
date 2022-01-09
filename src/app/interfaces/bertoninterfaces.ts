@@ -1,3 +1,5 @@
+// Interfaces de la App
+
 export interface Ofertas {
   _id: Id;
   type: string;
@@ -25,7 +27,6 @@ export interface CasasRurales {
   geometry: Geometry;
   properties: Properties;
 }
-
 
 interface Geometry {
   type: string;
@@ -61,6 +62,7 @@ interface PropertiesOfertas {
     zipfile: string;
   }
 
+// propiedades de los establecimientos
 interface Properties {
   documentname: string;
   turismdescription: string;
@@ -91,16 +93,4 @@ interface Properties {
   zipfile: string;
 }
 
-export interface Restaurantes {
-  _id: Id;
-  type: string;
-  geometry: Geometry;
-  properties: Properties;
-}
 
-export interface CasasRurales {
-  _id: Id;
-  type: string;
-  geometry: Geometry;
-  properties: Properties;
-}
