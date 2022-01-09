@@ -6,6 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   templateUrl: './detalle-resultados.page.html',
   styleUrls: ['./detalle-resultados.page.scss'],
 })
+
+/** Pagina donde muestra en detalle un establecimiento/oferta */
 export class DetalleResultadosPage implements OnInit {
 
   @Input() clase:string = "";
@@ -20,6 +22,7 @@ export class DetalleResultadosPage implements OnInit {
   ngOnInit() {
   }
 
+  // para cerrar la modal
   dismiss() {
     this.modalController.dismiss();
   }
