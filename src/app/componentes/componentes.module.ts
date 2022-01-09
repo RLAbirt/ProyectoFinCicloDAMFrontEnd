@@ -1,5 +1,4 @@
 import { PipesModule } from './../pipes/pipes.module';
-import { DistanciaPipe } from './../pipes/distancia.pipe';
 import { TarjetaCategoriaInicioComponent } from './tarjeta-categoria-inicio/tarjeta-categoria-inicio.component';
 import { CategoriaInicioRuralesComponent } from './categoria-inicio-rurales/categoria-inicio-rurales.component';
 import { CategoriaInicioRestaurantesComponent } from './categoria-inicio-restaurantes/categoria-inicio-restaurantes.component';
@@ -10,8 +9,6 @@ import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DetalleComponent } from './detalle/detalle.component'
-
-
 
 @NgModule({
   declarations: [
@@ -38,4 +35,6 @@ import { DetalleComponent } from './detalle/detalle.component'
     SelectorComponent
   ],
 })
+
+/** Componente que se usa para agrupar a todos los componentes */
 export class ComponentesModule { }
