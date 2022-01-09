@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './resultados.page.html',
   styleUrls: ['./resultados.page.scss'],
 })
+
+/** Pagina que va a mostrar los resultados de los establecimientos/ofertas */
 export class ResultadosPage implements OnInit {
 
   clase: string ="";
@@ -13,6 +15,7 @@ export class ResultadosPage implements OnInit {
 
   constructor( private activatedRoute:ActivatedRoute ) { }
 
+  // obtenemos de que tipo de establecimiento se trata
   ngOnInit() {
     this.activatedRoute.queryParams.subscribe(
       params => {
@@ -20,6 +23,7 @@ export class ResultadosPage implements OnInit {
       });
   }
 
+  // obtenemos la distancia (rango de kms en los que buscar un establecimiento)
   getDistancia( event:CustomEvent ) {
     console.log('evento',event);
     this.distancia = event.detail.value;
