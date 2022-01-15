@@ -1,3 +1,4 @@
+import { AlertSinResultadosComponent } from './alert-sin-resultados/alert-sin-resultados.component';
 import { PipesModule } from './../pipes/pipes.module';
 import { TarjetaCategoriaInicioComponent } from './tarjeta-categoria-inicio/tarjeta-categoria-inicio.component';
 import { CategoriaInicioRuralesComponent } from './categoria-inicio-rurales/categoria-inicio-rurales.component';
@@ -15,6 +16,7 @@ import { DetalleComponent } from './detalle/detalle.component'
     CategoriaInicioHotelesComponent,
     CategoriaInicioRestaurantesComponent,
     CategoriaInicioRuralesComponent,
+    AlertSinResultadosComponent,
     TarjetaCategoriaInicioComponent,
     DetalleComponent,
     ResultadosComponent,
@@ -29,6 +31,7 @@ import { DetalleComponent } from './detalle/detalle.component'
     CategoriaInicioHotelesComponent,
     CategoriaInicioRestaurantesComponent,
     CategoriaInicioRuralesComponent,
+    AlertSinResultadosComponent,
     TarjetaCategoriaInicioComponent,
     DetalleComponent,
     ResultadosComponent,

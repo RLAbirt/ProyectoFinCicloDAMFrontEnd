@@ -30,6 +30,7 @@ export class ResultadosComponent implements OnInit {
   tipo: string;
   seleccion: any;
   image: any;
+  isLoading:boolean = false;
 
   constructor(
     public navCtrl: NavController,
@@ -61,12 +62,14 @@ export class ResultadosComponent implements OnInit {
    */
   private loadPage() {
     this.listado = [];
+    this.isLoading = true;
     if (this.clase == 'hoteles') {
       this.httpService
         .getByGeoHoteles(this.lon, this.lat, this.distSelect)
         .subscribe((resp) => {
           this.image = Constants.AVA_HOTEL;
           this.listado = <Hoteles[]>resp;
+          this.isLoading = false;
         });
     } else if (this.clase == 'casas rurales') {
       this.httpService
@@ -79,6 +82,7 @@ export class ResultadosComponent implements OnInit {
         .subscribe((resp) => {
           this.image = Constants.AVA_RURAL;
           this.listado = <CasasRurales[]>resp;
+          this.isLoading = false;
         });
     } else if (this.clase == 'restaurantes') {
       this.httpService
@@ -86,11 +90,13 @@ export class ResultadosComponent implements OnInit {
         .subscribe((resp) => {
           this.image = Constants.AVA_RESTAURANT;
           this.listado = <Restaurantes[]>resp;
+          this.isLoading = false;
         });
     } else if (this.clase == 'ofertas') {
       this.httpService.getAllOfertas().subscribe((resp) => {
         this.image = Constants.AVA_OFERTA;
         this.listado = <Ofertas[]>resp;
+        this.isLoading = false;
       });
     }
   }

@@ -38,6 +38,8 @@
 </ion-list>
 
 <div class="spinner-pos">
-  <ion-spinner *ngIf="listado.length == 0"  name="crescent"></ion-spinner>
+  <ion-spinner *ngIf="isLoading"  name="crescent"></ion-spinner>
 </div>
+
+<app-alert-sin-resultados tipo="resultados" *ngIf="listado.length == 0 && !isLoading"></app-alert-sin-resultados>
 

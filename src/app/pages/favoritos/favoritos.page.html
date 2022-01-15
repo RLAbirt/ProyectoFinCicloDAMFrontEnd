@@ -124,4 +124,10 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  <app-alert-sin-resultados tipo="favoritos"
+    *ngIf="storageService.hotelesFavoritos.length === 0
+      && storageService.restaurantesFavoritos.length === 0
+      && storageService.casasRuralesFavoritos.length === 0
+      && storageService.ofertasFavoritos.length === 0" ></app-alert-sin-resultados>
 </ion-content>
