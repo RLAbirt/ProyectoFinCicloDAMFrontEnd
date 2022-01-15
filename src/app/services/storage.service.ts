@@ -9,7 +9,7 @@ import { Hoteles, Restaurantes, CasasRurales, Ofertas} from '../interfaces/berto
   providedIn: 'root'
 })
 
-
+/** Servicio para la gestión del storage */
 
 export class StorageService {
 
@@ -222,12 +222,14 @@ export class StorageService {
     }
   }
 
+  // marca el hotel como favorito y lo añade al storage
   public aniadirHotelFavorito(hotelFavorito:Hoteles)
   {
     this.hotelesFavoritos = this.aniadirEstablecimientoFavorito(this.hotelesFavoritos, 
       hotelFavorito, this.keyHoteles);
   }
 
+   // quita un hotel de la lista de favoritos
   public quitarHotelFavorito(hotelFavorito: Hoteles)
   {
     let indice:number = -1;
@@ -241,11 +243,13 @@ export class StorageService {
       }
   }
 
+  // marca el alojamiento como favorito y lo añade al storage
   public aniadirCasaRuralFavorito(casaRuralFavorito: CasasRurales) {
     this.casasRuralesFavoritos = this.aniadirEstablecimientoFavorito(this.casasRuralesFavoritos, 
       casaRuralFavorito, this.keyCasasRurales);
   }
 
+   // quita una casa rural de la lista de favoritos
   public quitarCasaRuralFavorito(casaRuralFavorito: CasasRurales) {
     let indice:number = -1;
     let resultado = this.casasRuralesFavoritos.find(
@@ -258,11 +262,13 @@ export class StorageService {
       }
   }
 
+  // marca la oferta como favorito y lo añade al storage
   public aniadirOfertaFavorito(ofertaFavorito:Ofertas) {
     this.ofertasFavoritos = this.aniadirEstablecimientoFavorito(this.ofertasFavoritos, 
       ofertaFavorito, this.keyOfertas);
   }
 
+   // quita una oferta de la lista de favoritos
   public quitarOfertaFavorito(ofertaFavorito: Ofertas) {
     let indice:number = -1;
     let resultado = this.ofertasFavoritos.find(
@@ -275,6 +281,7 @@ export class StorageService {
       }
   }
 
+  // borra todos los favoritos
   public borrarFavoritos()
   {
     this.restaurantesFavoritos = [];

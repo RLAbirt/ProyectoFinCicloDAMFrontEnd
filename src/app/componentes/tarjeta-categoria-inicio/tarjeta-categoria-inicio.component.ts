@@ -10,6 +10,8 @@ import { DetalleResultadosPage } from 'src/app/pages/detalle-resultados/detalle-
   templateUrl: './tarjeta-categoria-inicio.component.html',
   styleUrls: ['./tarjeta-categoria-inicio.component.scss']
 })
+
+/** Componente que se usa dentro de los componentes que se usan en la home */
 export class TarjetaCategoriaInicioComponent implements OnInit {
 
   @Input() establecimiento:any;
@@ -23,6 +25,7 @@ export class TarjetaCategoriaInicioComponent implements OnInit {
   constructor( private router:Router, private geoService:GeolocationService,
                private modalController:ModalController ) { }
 
+  /** Asigna la imagen del establecimiento */
   ngOnInit() {
     switch(this.tipo.toLowerCase()) {
       case 'hoteles':

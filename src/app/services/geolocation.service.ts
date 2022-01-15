@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import 'rxjs/add/observable/fromPromise';
 import { Injectable } from '@angular/core';
 import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
@@ -6,6 +5,10 @@ import { Geolocation, Geoposition } from '@ionic-native/geolocation/ngx';
 @Injectable({
   providedIn: 'root'
 })
+
+/**
+ * Servicio que se usa para obtener las coordenadas del usuario
+ */
 export class GeolocationService {
 
   private latitude: number = 0; 

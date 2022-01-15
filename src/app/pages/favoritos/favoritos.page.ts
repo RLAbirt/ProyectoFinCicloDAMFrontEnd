@@ -1,9 +1,8 @@
-import { Restaurantes } from './../../interfaces/bertoninterfaces';
-import { isNgTemplate } from '@angular/compiler';
+import {Restaurantes, Hoteles, CasasRurales, Ofertas} from './../../interfaces/bertoninterfaces';
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { StorageService } from 'src/app/services/storage.service';
-import  *  as Constants from "../../constants/constants";
+import * as Constants from '../../constants/constants';
 import { DetalleResultadosPage } from '../detalle-resultados/detalle-resultados.page';
 
 @Component({
@@ -11,81 +10,89 @@ import { DetalleResultadosPage } from '../detalle-resultados/detalle-resultados.
   templateUrl: './favoritos.page.html',
   styleUrls: ['./favoritos.page.scss'],
 })
-export class FavoritosPage implements OnInit {
 
+/**
+ * Pagina que muestra los favoritos de toda la app 
+ * se puede ver en detalle un favorito concreto o borrarlo 
+ */
+export class FavoritosPage implements OnInit {
   public avatarHotel = Constants.AVA_HOTEL;
   public avatarRestaurante = Constants.AVA_RESTAURANT;
   public avatarCasaRural = Constants.AVA_RURAL;
   public avatarOferta = Constants.AVA_OFERTA;
 
-  constructor(public storageService: StorageService, private modalController:ModalController) {
- 
-   }
+  constructor(
+    public storageService: StorageService,
+    private modalController: ModalController
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
-    /**
+  /**
    * Abre la modal para mostrar el detalle del establecimiento que no sea de ofertas
    * seleccionado.
    * @param item
    */
-     async abrirModalNoOfertas(item:any, clase:string){
-      
-      const modal = await this.modalController.create({
-        component: DetalleResultadosPage,
-        componentProps: {
-          'municipio': item.properties.municipality,
-          'territorio': item.properties.territory,
-          'nombre': item.properties.documentname,
-          'descripcion': item.properties.turismdescription,
-          'web': item.properties.web,
-          'clase': clase
-        }
-      });
-      await modal.present();
-    }
+  async abrirModalNoOfertas(item: any, clase: string) {
+    const modal = await this.modalController.create({
+      component: DetalleResultadosPage,
+      componentProps: {
+        municipio: item.properties.municipality,
+        territorio: item.properties.territory,
+        nombre: item.properties.documentname,
+        descripcion: item.properties.turismdescription,
+        web: item.properties.web,
+        clase: clase,
+      },
+    });
+    await modal.present();
+  }
 
-
-    /**
+  /**
    * Abre la modal para mostrar el detalle de una oferta
    * seleccionado.
    * @param item
    */
-     async abrirModalOfertas(item:any){
-      const modal = await this.modalController.create({
-        component: DetalleResultadosPage,
-        componentProps: {
-          'municipio': item.properties.municipality,
-          'territorio': item.properties.territory,
-          'nombre': item.properties.documentname,
-          'descripcion': item.properties.documentdescription,
-          'web': item.properties.friendlyurl,
-          'clase': "ofertas",
-        }
-      });
-      await modal.present();
-    }
-    quitarFavoritos(item:any, clase:string) {
-    
-      let indice: number = -1;    
-      
-      // this.clase: restaurantes, hoteles, casas rurales, ofertas
-      switch(clase) {
-        case "restaurantes":
-          this.storageService.quitarRestauranteFavorito(item);
-          break;
-        case "hoteles":
-          this.storageService.quitarHotelFavorito(item);
-          break;
-        case "casas rurales":
-          this.storageService.quitarCasaRuralFavorito(item); 
-          break;
-        case "ofertas":
-          this.storageService.quitarOfertaFavorito(item);
-          break;
-        default:
-          console.log("Error desconocido en Berton");
-      }
-    }
+  async abrirModalOfertas(item: any) {
+    const modal = await this.modalController.create({
+      component: DetalleResultadosPage,
+      componentProps: {
+        municipio: item.properties.municipality,
+        territorio: item.properties.territory,
+        nombre: item.properties.documentname,
+        descripcion: item.properties.documentdescription,
+        web: item.properties.friendlyurl,
+        clase: 'ofertas',
+      },
+    });
+    await modal.present();
+  }
+
+  /**
+   * quitar de favoritos un hotel
+   */
+  public quitarFavoritoHotel(hotelAux: Hoteles): void {
+    this.storageService.quitarHotelFavorito(hotelAux);
+  }
+
+  /**
+   * quitar de favoritos un restaurante
+   */
+  public quitarFavoritoRestaurante(restauranteAux: Restaurantes): void {
+    this.storageService.quitarRestauranteFavorito(restauranteAux);
+  }
+
+  /**
+   * quitar de favoritos una casa rural
+   */
+  public quitarFavoritoCasasRurales(casaRuralAux: CasasRurales): void {
+    this.storageService.quitarCasaRuralFavorito(casaRuralAux);
+  }
+
+  /**
+   * quitar de favoritos un restaurante
+   */
+  public quitarFavoritoOferta(ofertaAux: Ofertas): void {
+    this.storageService.quitarOfertaFavorito(ofertaAux);
+  }
 }
