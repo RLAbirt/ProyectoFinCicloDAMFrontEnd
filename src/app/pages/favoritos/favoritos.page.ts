@@ -66,4 +66,26 @@ export class FavoritosPage implements OnInit {
       });
       await modal.present();
     }
+    quitarFavoritos(item:any, clase:string) {
+    
+      let indice: number = -1;    
+      
+      // this.clase: restaurantes, hoteles, casas rurales, ofertas
+      switch(clase) {
+        case "restaurantes":
+          this.storageService.quitarRestauranteFavorito(item);
+          break;
+        case "hoteles":
+          this.storageService.quitarHotelFavorito(item);
+          break;
+        case "casas rurales":
+          this.storageService.quitarCasaRuralFavorito(item); 
+          break;
+        case "ofertas":
+          this.storageService.quitarOfertaFavorito(item);
+          break;
+        default:
+          console.log("Error desconocido en Berton");
+      }
+    }
 }

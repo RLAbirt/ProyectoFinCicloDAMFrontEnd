@@ -55,7 +55,7 @@ export class ResultadosComponent implements OnInit {
         this.image = Constants.AVA_HOTEL;
         this.listado = <Hoteles[]>resp;
       })
-    }else if(this.clase == "alojamientos"){
+    }else if(this.clase == "casas rurales"){
       this.httpService.getByGeoCasasRurales(this.lon,this.lat,this.distSelect, Constants.CASA_RURAL_TYPE)
       .subscribe(resp => {
         this.image = Constants.AVA_RURAL;
@@ -124,7 +124,7 @@ export class ResultadosComponent implements OnInit {
 
   // devuelve -1 si no es favorito. Devuelve el indice de donde se encuentra el establecimiento
   public esFavorito(item:any): boolean {
-     // this.clase: restaurantes, hoteles, alojamientos, ofertas
+     // this.clase: restaurantes, hoteles, casas rurales, ofertas
      let indiceAux: number = -1;
 
      switch(this.clase) {
@@ -136,7 +136,7 @@ export class ResultadosComponent implements OnInit {
         indiceAux = this.storageService.esFavoritoEstablecimiento(
           this.storageService.hotelesFavoritos, item, this.storageService.keyHoteles);
         break;
-      case "alojamientos":
+      case "casas rurales":
         indiceAux = this.storageService.esFavoritoEstablecimiento(
           this.storageService.casasRuralesFavoritos, item, this.storageService.keyCasasRurales);
         break;
@@ -155,7 +155,7 @@ export class ResultadosComponent implements OnInit {
     
     let indice: number = -1;    
     
-    // this.clase: restaurantes, hoteles, alojamientos, ofertas
+    // this.clase: restaurantes, hoteles, casas rurales, ofertas
     switch(this.clase) {
       case "restaurantes":
         this.storageService.quitarRestauranteFavorito(item);
@@ -163,7 +163,7 @@ export class ResultadosComponent implements OnInit {
       case "hoteles":
         this.storageService.quitarHotelFavorito(item);
         break;
-      case "alojamientos":
+      case "casas rurales":
         this.storageService.quitarCasaRuralFavorito(item); 
         break;
       case "ofertas":
@@ -175,7 +175,7 @@ export class ResultadosComponent implements OnInit {
   }
 
   anadirFavoritos(item:any) {
-    // this.clase: restaurantes, hoteles, alojamientos, ofertas
+    // this.clase: restaurantes, hoteles, casas rurales, ofertas
     switch(this.clase) {
       case "restaurantes":
         this.storageService.aniadirRestauranteFavorito(item);
@@ -183,7 +183,7 @@ export class ResultadosComponent implements OnInit {
       case "hoteles":
         this.storageService.aniadirHotelFavorito(item);
         break;
-      case "alojamientos":
+      case "casas rurales":
         this.storageService.aniadirCasaRuralFavorito(item); 
         break;
       case "ofertas":

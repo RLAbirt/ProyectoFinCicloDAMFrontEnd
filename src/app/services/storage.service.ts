@@ -46,6 +46,7 @@ export class StorageService {
   // Carga en el array de restaurantes favoritos el contenido del storage
   private ObtenerRestaurantesFavoritos()
   {
+    this.restaurantesFavoritos = [];
     // Obtenemos la promesa que devuelve getObject(). Debemos indicar el tipo de dato que estamos leyendo
     let datosPromesa: Promise<Restaurantes[]> = this.getObject(this.keyRestaurantes);
     
@@ -61,6 +62,7 @@ export class StorageService {
   // Carga en el array de hoteles favoritos el contenido del storage
   private ObtenerHotelesFavoritos()
   {
+    this.hotelesFavoritos = [];
     // Obtenemos la promesa que devuelve getObject(). Debemos indicar el tipo de dato que estamos leyendo
     let datosPromesa: Promise<Hoteles[]> = this.getObject(this.keyHoteles);
     
@@ -75,6 +77,7 @@ export class StorageService {
   // Carga en el array de casas rurales favoritos el contenido del storage
   private obtenerCasasRuralesFavoritos()
   {
+    this.casasRuralesFavoritos = [];
     // Obtenemos la promesa que devuelve getObject(). Debemos indicar el tipo de dato que estamos leyendo
     let datosPromesa: Promise<CasasRurales[]> = this.getObject(this.keyCasasRurales);
     
@@ -89,6 +92,7 @@ export class StorageService {
   // Carga en el array de ofertas favoritos el contenido del storage
   private obtenerOfertasFavoritos()
   {
+    this.ofertasFavoritos = [];
     // Obtenemos la promesa que devuelve getObject(). Debemos indicar el tipo de dato que estamos leyendo
     let datosPromesa: Promise<Ofertas[]> = this.getObject(this.keyOfertas);
     // Con then() ejecutamos el código que queremos que procese los datos recibidos
