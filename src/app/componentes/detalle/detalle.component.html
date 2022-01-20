@@ -9,7 +9,9 @@
   </ion-card-header>
   <ion-card-content>
     <div [innerHTML]="descripcion"></div>
-    <h5><a href="#" onclick="window.open(web)">Visita la web</a></h5>
+    <h5 *ngIf=web>
+      <a target="_blank" [href]=web>Visita la web</a>
+    </h5>
   </ion-card-content>
   
 </ion-card>
